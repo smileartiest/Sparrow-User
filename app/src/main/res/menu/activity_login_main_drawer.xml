@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_icon1"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_category"
+            android:icon="@drawable/category_icon1"
+            android:title="Category"/>
+
+        <item
+            android:id="@+id/nav_offer"
+            android:icon="@drawable/offer_icon"
+            android:title="Offer"/>
+        <item
+            android:id="@+id/nav_myprofile"
+            android:icon="@drawable/myprofile_icon1"
+            android:title="My Account"/>
+        <item
+            android:id="@+id/nav_cart"
+            android:icon="@drawable/cart_icon1"
+            android:title="Cart"/>
+        <item
+            android:id="@+id/nav_contactus"
+            android:icon="@drawable/contact_icon"
+            android:title="Contact Us"/>
+
+    <item
+        android:id="@+id/nav_share"
+        android:icon="@drawable/ic_menu_share"
+        android:title="Invite Friends" />
+    <item
+        android:id="@+id/nav_rateapp"
+        android:icon="@drawable/rate_this_icon"
+        android:title="Rate This App" />
+
+    </group>
+
+
+</menu>

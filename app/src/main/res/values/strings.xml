@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Sparrow Market</string>
+    <string name="title_activity_add_adress">Map</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_my_location">Map</string>
+    <string name="title_activity_viewmore">Map</string>
+    <string name="title_activity_view_more_details">Map</string>
+    <string name="default_notification_channel_id">smile</string>
+</resources>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    app:cardElevation="1dp"
+    android:layout_margin="1dp"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/row_market_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/row_market_pic"
+            android:layout_width="130dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/row_market_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/add_address_icon" />
+
+        <TextView
+            android:id="@+id/row_market_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="serif"
+            android:text="Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_market_pic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/row_market_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="serif"
+            android:text="Category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_market_pic"
+            app:layout_constraintTop_toBottomOf="@+id/row_market_name" />
+
+        <Spinner
+            android:id="@+id/row_market_qnty"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/spinnerline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/row_market_pic"
+            app:layout_constraintTop_toBottomOf="@+id/row_market_category" />
+
+        <TextView
+            android:id="@+id/row_market_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="serif"
+            android:text="Price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/row_market_qnty" />
+
+        <Button
+            android:id="@+id/row_market_addbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorAccent"
+            android:fontFamily="serif"
+            android:text="add"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/row_market_price" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Rs . "
+            app:layout_constraintEnd_toStartOf="@+id/row_market_price"
+            app:layout_constraintStart_toEndOf="@+id/row_market_pic"
+            app:layout_constraintTop_toBottomOf="@+id/row_market_qnty" />
+
+        <LinearLayout
+
+            android:id="@+id/row_market_qntytybox"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/row_market_removeicon"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/borderred"
+                android:drawableRight="@drawable/remove_red_icon" />
+
+            <TextView
+                android:id="@+id/row_market_totalqn"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/row_market_addicon"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/bordergreen"
+                android:drawableRight="@drawable/add_green_icon" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/row_market_stock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/gray"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="out of stock"
+            android:padding="5dp"
+            android:textColor="@color/block"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/row_market_pic"
+            app:layout_constraintEnd_toEndOf="@+id/row_market_pic"
+            app:layout_constraintStart_toStartOf="@+id/row_market_pic" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
