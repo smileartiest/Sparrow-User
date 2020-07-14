@@ -7,48 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <fragment
-        android:id="@+id/my_location_map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/my_location_list"
-        tools:context=".MyLocation" />
-
     <TextView
-        android:id="@+id/textView52"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="serif"
-        android:text="Choose Your Location"
-        android:textColor="@color/block"
-        android:textSize="20sp"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/view16"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/gray"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/textView52" />
-
-    <TextView
-        android:id="@+id/my_location_current"
+        android:id="@+id/my_location_add_loc"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -56,30 +16,32 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="serif"
         android:gravity="center_vertical"
-        android:text="Use my current location"
-        android:textSize="20sp"
+        android:text="Add Adress"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/block"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toEndOf="@+id/my_location_current_img"
-        map:layout_constraintTop_toBottomOf="@+id/view16" />
+        map:layout_constraintTop_toBottomOf="@+id/cardView3" />
 
     <View
         android:id="@+id/view21"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@color/block"
-        map:layout_constraintBottom_toTopOf="@+id/my_location_list"
+        android:background="@color/colorPrimaryDark"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="@+id/my_location_current"
-        map:layout_constraintTop_toBottomOf="@+id/my_location_current" />
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/my_location_add_loc" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_location_list"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        map:layout_constraintBottom_toTopOf="@+id/my_location_map"
+        android:layout_marginBottom="16dp"
+        map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toBottomOf="@+id/view21"
@@ -90,10 +52,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        map:layout_constraintBottom_toBottomOf="@+id/my_location_current"
+        map:layout_constraintBottom_toBottomOf="@+id/my_location_add_loc"
         map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="@+id/my_location_current"
+        map:layout_constraintTop_toTopOf="@+id/my_location_add_loc"
         map:srcCompat="@drawable/my_location_round_icon" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        map:cardElevation="6dp"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/my_location_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="serif"
+                android:text="Choose Your Location"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorPrimaryDark"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="18dp" />
+        </androidx.appcompat.widget.Toolbar>
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

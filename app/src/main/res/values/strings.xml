@@ -7,4 +7,5 @@
     <string name="title_activity_viewmore">Map</string>
     <string name="title_activity_view_more_details">Map</string>
     <string name="default_notification_channel_id">smile</string>
+    <string name="title_activity_check_location">Map</string>
 </resources>

@@ -3,12 +3,14 @@ package com.smile.atozapp.addressdetails;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,8 +34,7 @@ public class AddressPage extends AppCompatActivity {
     RecyclerView list;
     Button conformbtn;
     FloatingActionButton addaddressbtn;
-
-    ConstraintLayout nodata;
+    Toolbar mytoolbar;
 
     Query q;
 
@@ -41,6 +42,11 @@ public class AddressPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.address_page);
+
+        mytoolbar = findViewById(R.id.addresspage_toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mytoolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
 
         list = findViewById(R.id.addresspage_list);
         conformbtn = findViewById(R.id.addresspage_conformbtn);
@@ -51,7 +57,12 @@ public class AddressPage extends AppCompatActivity {
 
         q = AppUtil.ADDRESURL.child(new TempData(AddressPage.this).getuid());
 
-        getCount();
+        mytoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
 
@@ -69,24 +80,6 @@ public class AddressPage extends AppCompatActivity {
         };
         list.setAdapter(frecycle);
 
-    }
-
-    public void getCount(){
-        q.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue()!=null){
-
-                }else {
-                    //nodata.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
     @Override

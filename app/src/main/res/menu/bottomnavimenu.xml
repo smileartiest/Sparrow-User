@@ -21,8 +21,8 @@
         android:icon="@drawable/offer_icon"/>
 
     <item
-        android:id="@+id/bot_nav_cart"
-        android:icon="@drawable/cart_icon1"
-        android:title="cart"/>
+        android:id="@+id/bot_nav_notification"
+        android:icon="@drawable/notifications_icon"
+        android:title="Notification"/>
 
 </menu>

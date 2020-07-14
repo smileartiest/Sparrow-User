@@ -44,10 +44,10 @@ import java.util.Locale;
 import static android.os.Build.*;
 
 public class AddAdress extends FragmentActivity implements GoogleMap.OnMyLocationButtonClickListener,
-        GoogleMap.OnMyLocationClickListener,OnMapReadyCallback{
+        GoogleMap.OnMyLocationClickListener, OnMapReadyCallback {
 
     private GoogleMap mMap;
-    TextInputLayout flatno,area,cno;
+    TextInputLayout flatno, area, cno;
     TextView cityname;
     Button completebtn;
 
@@ -68,7 +68,7 @@ public class AddAdress extends FragmentActivity implements GoogleMap.OnMyLocatio
         setContentView(R.layout.add_adress);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         flatno = findViewById(R.id.address_houseno);
         area = findViewById(R.id.address_area);
@@ -79,9 +79,9 @@ public class AddAdress extends FragmentActivity implements GoogleMap.OnMyLocatio
         t = new TempData(AddAdress.this);
 
         if (VERSION.SDK_INT >= VERSION_CODES.M) {
-            if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
-            }else {
+            } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                         Manifest.permission.ACCESS_FINE_LOCATION)) {
                     // Show an explanation to the user *asynchronously* -- don't block
@@ -118,7 +118,6 @@ public class AddAdress extends FragmentActivity implements GoogleMap.OnMyLocatio
                         //String country = returnAddress.getCountryName();
                         //String region_code = returnAddress.getCountryCode();
                         //String zipcode = returnAddress.getPostalCode();
-                        t.addlocation(localityString);
                         cityname.setText(localityString);
                     } else {
                         Toast.makeText(getApplicationContext(),
@@ -143,18 +142,23 @@ public class AddAdress extends FragmentActivity implements GoogleMap.OnMyLocatio
                 String area1 = area.getEditText().getText().toString();
                 String cno1 = cno.getEditText().getText().toString();
 
-                if(fno1.length()!=0){
-                    if(area1.length()!=0){
-                        if(cno1.length()!=0){
-
+                if (fno1.length() != 0) {
+                    if (area1.length() != 0) {
+                        if (cno1.length() != 0) {
                             String key = AppUtil.ADDRESURL.push().getKey();
-                            AddressParameters ad = new AddressParameters(key , t.getuid(), String.valueOf(currentloc.getLatitude()), String.valueOf(currentloc.getLongitude()),cityname.getText().toString() ,fno1+","+area1 , cno1);
+                            AddressParameters ad = new AddressParameters(key, t.getuid(), String.valueOf(currentloc.getLatitude()), String.valueOf(currentloc.getLongitude()), cityname.getText().toString(), fno1 + "," + area1, cno1);
                             AppUtil.ADDRESURL.child(t.getuid()).child(key).setValue(ad);
+                            t.addlocation(cityname.getText().toString(), fno1 + "," + area1);
                             finish();
-
-                        }else { cno.getEditText().setError("enter valid detail"); }
-                    }else { area.getEditText().setError("enter valid detail"); }
-                }else { flatno.getEditText().setError("enter valid details"); }
+                        } else {
+                            cno.getEditText().setError("enter valid detail");
+                        }
+                    } else {
+                        area.getEditText().setError("enter valid detail");
+                    }
+                } else {
+                    flatno.getEditText().setError("enter valid details");
+                }
             }
         });
 
@@ -165,6 +169,9 @@ public class AddAdress extends FragmentActivity implements GoogleMap.OnMyLocatio
         mMap = googleMap;
         mMap.setMapType(googleMap.MAP_TYPE_NORMAL);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);

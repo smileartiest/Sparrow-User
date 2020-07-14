@@ -36,12 +36,18 @@ public class TempData {
         ed.clear().apply();
     }
 
-    public void addlocation(String loc){
-        ed.putString("myloc",loc).apply();
+    public void addlocation(String city , String add){
+        ed.putString("city",city);
+        ed.putString("add" , add);
+        ed.apply();
     }
 
-    public String getloc(){
-        return sharedPreferences.getString("myloc",null);
+    public String getcity(){
+        return sharedPreferences.getString("city",null);
+    }
+
+    public String getadd(){
+        return sharedPreferences.getString("add",null);
     }
 
     public void addtoken(String tid){

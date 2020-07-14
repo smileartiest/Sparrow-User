@@ -56,10 +56,8 @@ public class MyAccount extends Fragment {
     View v;
 
     RecyclerView addresslist;
-    TextView name,email,phno;
+    TextView name,email,phno,name_initial;
     FloatingActionButton addaddress;
-    Button disclaimer;
-
     Query q;
 
     ProgressDialog pd;
@@ -83,7 +81,7 @@ public class MyAccount extends Fragment {
         phno = v.findViewById(R.id.profile_phno);
         addresslist = v.findViewById(R.id.profile_adlist);
         addaddress = v.findViewById(R.id.profile_addressbtn);
-        disclaimer = v.findViewById(R.id.profile_disclaimer);
+        name_initial = v.findViewById(R.id.profile_name_initial);
 
         addresslist.setLayoutManager(new LinearLayoutManager(getContext()));
         addresslist.setHasFixedSize(true);
@@ -119,6 +117,8 @@ public class MyAccount extends Fragment {
 
                     if (dataSnapshot.child("name").getValue() != null) {
                         name.setText(dataSnapshot.child("name").getValue().toString());
+                        String temp = dataSnapshot.child("name").getValue().toString();
+                        name_initial.setText(String.valueOf(temp.charAt(0)).toUpperCase());
                     } else {
                         name.setText("");
                     }
@@ -144,22 +144,6 @@ public class MyAccount extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        disclaimer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
-                ad.setTitle("Disclaimer !");
-                ad.setMessage("A Sparrow Hyper Market is self-service shop offering a wide variety of food, beverages and household products, organized into sections. It is larger and has a wider selection than earlier grocery stores, but is smaller and more limited in the range of merchandise than a hypermarket or big-box market.");
-                ad.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                ad.show();
-            }
-        });
 
         addaddress.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,13 +4,13 @@
 
     <item
         app:showAsAction="always"
-        android:icon="@drawable/mall_icon"
-        android:id="@+id/login_menu_myorder"
-        android:title="My Order"/>
+        android:icon="@drawable/cart_icon1"
+        android:id="@+id/login_menu_mycart"
+        android:title="My Cart"/>
     <item
         app:showAsAction="always"
-        android:icon="@drawable/logout_icon"
-        android:id="@+id/login_menu_logout"
+        android:icon="@drawable/myprofile_icon1"
+        android:id="@+id/login_menu_myprofile"
         android:title="Logout"/>
 
 </menu>

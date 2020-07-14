@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,14 +18,17 @@ public class MyLocationHold extends RecyclerView.ViewHolder {
     }
 
     public void setdetails(final  Context c1 ,final String address1 ,final String city1){
-        TextView loc = itemView.findViewById(R.id.row_location_name);
+        TextView city = itemView.findViewById(R.id.row_location_city);
+        TextView area = itemView.findViewById(R.id.row_location_area);
         ImageView pic = itemView.findViewById(R.id.row_location_img);
         pic.setImageResource(R.drawable.my_location_round_icon);
-        loc.setText(address1);
-        loc.setOnClickListener(new View.OnClickListener() {
+        city.setText(city1);
+        area.setText(address1);
+        city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TempData(c1).addlocation(city1);
+                new TempData(c1).addlocation(city1,address1);
+                Toast.makeText(c1, "Add Successful", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.smile.atozapp.controller.TempData;
 
 public class Splase extends AppCompatActivity {
 
@@ -33,34 +36,14 @@ public class Splase extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext() , Login.class));finish();
             }
         };
-
-        permissionbtn = findViewById(R.id.splase_permission);
-        permissionbtn.setVisibility(View.INVISIBLE);
-
-        if(!checkLocationPermission())
-        {
-            checkLocationPermission();
-        }else {
-            h.postDelayed(r,3000);
+        h.postDelayed(r,3000);
+        if(new TempData(Splase.this).getuid()!=null) {
+            Log.d("UID", new TempData(Splase.this).getuid());
         }
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        permissionbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!checkLocationPermission())
-                {
-                    checkLocationPermission();
-                }else {
-                    h.postDelayed(r,3000);
-                }
-            }
-        });
+        if(!checkLocationPermission()){
+            checkLocationPermission();
+        }
 
     }
 
@@ -73,12 +56,10 @@ public class Splase extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
-                permissionbtn.setVisibility(View.VISIBLE);
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
-                permissionbtn.setVisibility(View.VISIBLE);
             }
             return false;
         } else {

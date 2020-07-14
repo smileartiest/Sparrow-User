@@ -5,11 +5,10 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
+         location permissions for the "MyLocation" functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -39,10 +38,17 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".CheckLocation"
+            android:label="@string/title_activity_check_location"></activity>
+        <activity
+            android:name=".View_Tutorial"
+            android:theme="@style/AppTheme1" />
+        <activity
             android:name=".ViewMoreDetails"
-            android:label="@string/title_activity_view_more_details"></activity>
+            android:label="@string/title_activity_view_more_details" />
         <activity
             android:name=".MyLocation"
+            android:theme="@style/AppTheme1"
             android:label="@string/title_activity_my_location" />
         <activity
             android:name=".ViewDressDetails"
@@ -101,23 +107,22 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_launcher_foreground" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-
         <meta-data
             android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />
         <meta-data
             android:name="firebase_analytics_collection_enabled"
             android:value="false" />
-
     </application>
 
 </manifest>
