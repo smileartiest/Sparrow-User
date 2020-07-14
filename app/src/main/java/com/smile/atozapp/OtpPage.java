@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,9 @@ public class OtpPage extends AppCompatActivity {
     Button verify_btn;
     LottieAnimationView animationView;
 
+    Runnable r;
+    Handler h = new Handler();
+
     String verify_code = null;
 
     CountDownTimer count_time;
@@ -63,10 +67,17 @@ public class OtpPage extends AppCompatActivity {
         animationView.playAnimation();
         animationView.loop(true);
 
+        r = new Runnable() {
+            @Override
+            public void run() {
+                new SendSMS(OtpPage.this, getIntent().getStringExtra("ph"), "Hai welcome to Sparrow . Your verification code is " + verify_code + " . Please don't share share this code.");
+                hour(90);
+            }
+        };
+
         if(getIntent().getStringExtra("ph")!=null) {
             verify_code = getRandomNumberString();
-            new SendSMS(OtpPage.this, getIntent().getStringExtra("ph"), "Hai welcome to Sparrow . Your verification code is " + verify_code + " . Please don't share share this code.");
-            hour(90);
+            h.postDelayed(r,2000);
             animationView.setAnimation(R.raw.otp_send);
             animationView.playAnimation();
             animationView.loop(true);
@@ -85,8 +96,13 @@ public class OtpPage extends AppCompatActivity {
             public void onClick(View v) {
                 if(verify_btn.getText().toString().equals("RESENT OTP")){
                     verify_btn.setVisibility(View.GONE);
-                    new SendSMS(OtpPage.this, getIntent().getStringExtra("ph"), "Hai welcome to Sparrow . Your verification code is " + getRandomNumberString() + " . Please don't share share this code.");
-                    hour(90);
+                    verify_code = getRandomNumberString();
+                    h.postDelayed(r,2000);
+                    verify_btn.setVisibility(View.GONE);
+                    animationView.setVisibility(View.VISIBLE);
+                    animationView.setAnimation(R.raw.otp_verification);
+                    animationView.playAnimation();
+                    animationView.loop(true);
                 }
                 else if(verify_btn.getText().toString().equals("TRY AFTER SOME TIME")){
                     finish();

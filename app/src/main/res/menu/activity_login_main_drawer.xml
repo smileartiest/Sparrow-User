@@ -6,58 +6,83 @@
     <group
         android:id="@+id/group1"
         android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/home_icon1"
-            android:title="Home" />
-        <item
-            android:id="@+id/nav_category"
-            android:icon="@drawable/category_icon1"
-            android:title="Category"/>
 
-        <item
-            android:id="@+id/nav_offer"
-            android:icon="@drawable/offer_icon"
-            android:title="Offer"/>
-        <item
-            android:id="@+id/nav_myprofile"
-            android:icon="@drawable/myprofile_icon1"
-            android:title="My Account"/>
-        <item
-            android:id="@+id/nav_cart"
-            android:icon="@drawable/cart_icon1"
-            android:title="My Cart"/>
+        <item android:title="Personal Details">
+            <menu>
+                <item
+                    android:id="@+id/nav_myprofile"
+                    android:icon="@drawable/myprofile_icon1"
+                    android:title="My Account" />
+                <item
+                    android:id="@+id/nav_cart"
+                    android:icon="@drawable/cart_icon1"
+                    android:title="My Cart" />
 
-        <item
-            android:id="@+id/nav_myorder"
-            android:title="My Order"
-            android:icon="@drawable/myorder_icon"/>
+                <item
+                    android:id="@+id/nav_myorder"
+                    android:icon="@drawable/myorder_icon"
+                    android:title="My Order" />
 
-        <item
-            android:id="@+id/nav_contactus"
-            android:icon="@drawable/contactus_icon"
-            android:title="Contact Us"/>
+                <item
+                    android:id="@+id/nav_home"
+                    android:icon="@drawable/home_icon1"
+                    android:title="Home" />
+                <item
+                    android:id="@+id/nav_category"
+                    android:icon="@drawable/category_icon1"
+                    android:title="Category" />
+            </menu>
+        </item>
+    </group>
 
-        <item
-            android:id="@+id/nav_disclaimer"
-            android:title="Disclaimer"
-            android:icon="@drawable/disclaimer_icon"/>
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
 
-        <item
-            android:title="Logout This App"
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/logout_icon"/>
+        <item android:title="Contact Details">
+            <menu>
+                <item
+                    android:id="@+id/nav_offer"
+                    android:icon="@drawable/offer_icon"
+                    android:title="Offer" />
+
+                <item
+                    android:id="@+id/nav_contactus"
+                    android:icon="@drawable/contactus_icon"
+                    android:title="Contact Us" />
+
+                <item
+                    android:id="@+id/nav_disclaimer"
+                    android:icon="@drawable/disclaimer_icon"
+                    android:title="Disclaimer" />
+
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/logout_icon"
+                    android:title="Logout" />
+            </menu>
+        </item>
 
     </group>
 
-    <item
-        android:id="@+id/nav_share"
-        android:icon="@drawable/ic_menu_share"
-        android:title="Invite Friends" />
-    <item
-        android:id="@+id/nav_rateapp"
-        android:icon="@drawable/rate_this_icon"
-        android:title="Rate This App" />
+    <group
+        android:id="@+id/group3"
+        android:checkableBehavior="single">
+
+        <item android:title="Communication">
+            <menu>
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Invite Friends" />
+                <item
+                    android:id="@+id/nav_rateapp"
+                    android:icon="@drawable/rate_this_icon"
+                    android:title="Rate This App" />
+            </menu>
+        </item>
+
+    </group>
 
 
 </menu>

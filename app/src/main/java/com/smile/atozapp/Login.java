@@ -33,19 +33,6 @@ public class Login extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (new TempData(Login.this).getlogsts() != null) {
-            if (new TempData(Login.this).getlogsts().equals("login")) {
-                startActivity(new Intent(getApplicationContext(), LoginMain.class));
-                finish();
-            }
-        }
-
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
 

@@ -44,11 +44,15 @@ public class Registration extends AppCompatActivity {
                         AppUtil.REGURL.child(getIntent().getStringExtra("ph")).child("name").setValue(name1);
                         AppUtil.REGURL.child(getIntent().getStringExtra("ph")).child("email").setValue(email1);
                         new TempData(Registration.this).addlogsts("login");
-                        startActivity(new Intent(getApplicationContext() , View_Tutorial.class));finish();
+                        movepage();
                     }else {email.getEditText().setError("enter valid email");}
                 }else {name.getEditText().setError("enter valid name");}
             }
         });
 
+    }
+
+    void movepage(){
+        startActivity(new Intent(getApplicationContext() , LoginMain.class));finishAffinity();
     }
 }

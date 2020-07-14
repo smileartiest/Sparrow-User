@@ -28,9 +28,14 @@ public class MyLocationHold extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 new TempData(c1).addlocation(city1,address1);
-                Toast.makeText(c1, "Add Successful", Toast.LENGTH_SHORT).show();
+                openConformationDialog();
             }
         });
     }
+
+    public void openConformationDialog(){
+
+    }
+
 
 }

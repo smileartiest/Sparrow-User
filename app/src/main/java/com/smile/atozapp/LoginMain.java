@@ -34,9 +34,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.controller.TempData;
 import com.smile.atozapp.fragment.Category;
 import com.smile.atozapp.fragment.ContactUs;
@@ -51,6 +55,10 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
 
     TextView locantion_city,location_local,search_products;
     ConstraintLayout location_card,search_box;
+
+    ConstraintLayout order_dialog;
+    TextView dialog_title;
+    Button dialog_complete;
 
     Toolbar myaction;
     TempData t;
@@ -73,19 +81,23 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
                     return true;
                 case R.id.bot_nav_notification:
                     search_box.setVisibility(View.GONE);
+                    order_dialog.setVisibility(View.GONE);
                     return true;
                 case R.id.bot_nav_category:
                     search_box.setVisibility(View.GONE);
+                    order_dialog.setVisibility(View.GONE);
                     loadfragment(new Category());
                     getSupportActionBar().hide();
                     return true;
                 case R.id.bot_nav_search:
                     search_box.setVisibility(View.GONE);
+                    order_dialog.setVisibility(View.GONE);
                     loadfragment(new Search());
                     getSupportActionBar().hide();
                     return true;
                 case R.id.bot_nav_offer:
                     search_box.setVisibility(View.GONE);
+                    order_dialog.setVisibility(View.GONE);
                     loadfragment(new Offer());
                     getSupportActionBar().hide();
                     return true;
@@ -102,6 +114,10 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
         myaction = findViewById(R.id.toolbar);
         setSupportActionBar(myaction);
         getSupportActionBar().show();
+
+        order_dialog = findViewById(R.id.main_didalog);
+        dialog_title = order_dialog.findViewById(R.id.main_d_title);
+        dialog_complete = order_dialog.findViewById(R.id.main_d_conformbtn);
 
         locantion_city = findViewById(R.id.main_city);
         location_local = findViewById(R.id.main_local);
@@ -145,8 +161,25 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             Log.d("else","working");
             locantion_city.setText("Please Add Location First");
             location_local.setText("");
-            startActivity(new Intent(getApplicationContext() , MyLocation.class));
         }
+
+        AppUtil.CARTURL.child(new TempData(LoginMain.this).getuid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null){
+                    dialog_title.setText("Total Cart Items "+ snapshot.getChildrenCount());
+                    order_dialog.setVisibility(View.VISIBLE);
+                }else{
+                    order_dialog.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         loadfragment(new Home());
 
     }
@@ -162,6 +195,14 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
     protected void onResume() {
         super.onResume();
 
+        if(t.getcity()!=null){
+            locantion_city.setText(t.getcity());
+            location_local.setText(t.getadd());
+        }else{
+            locantion_city.setText("Set Location");
+            location_local.setText("");
+        }
+
         location_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,6 +216,30 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
                 search_box.setVisibility(View.GONE);
                 loadfragment(new Search());
                 getSupportActionBar().hide();
+            }
+        });
+
+        AppUtil.CARTURL.child(new TempData(LoginMain.this).getuid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null){
+                    dialog_title.setText("Total Cart Items "+ snapshot.getChildrenCount());
+                    order_dialog.setVisibility(View.VISIBLE);
+                }else{
+                    order_dialog.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        dialog_complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext() , MyCart.class));
             }
         });
 
@@ -195,6 +260,7 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
                 break;
             case R.id.login_menu_myprofile:
                 search_box.setVisibility(View.GONE);
+                order_dialog.setVisibility(View.GONE);
                 loadfragment(new MyAccount());
                 getSupportActionBar().hide();
                 break;
@@ -212,24 +278,29 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             getSupportActionBar().show();
         } else if (item.getItemId() == R.id.nav_category) {
             search_box.setVisibility(View.GONE);
+            order_dialog.setVisibility(View.GONE);
             loadfragment(new Category());
             getSupportActionBar().hide();
         } else if (item.getItemId() == R.id.nav_offer) {
             search_box.setVisibility(View.GONE);
+            order_dialog.setVisibility(View.GONE);
             loadfragment(new Offer());
             getSupportActionBar().hide();
         } else if(item.getItemId() == R.id.nav_myprofile){
             search_box.setVisibility(View.GONE);
+            order_dialog.setVisibility(View.GONE);
             loadfragment(new MyAccount());
             getSupportActionBar().hide();
         } else if(item.getItemId() == R.id.nav_cart){
             startActivity(new Intent(getApplicationContext(), MyCart.class));
         }else if(item.getItemId() == R.id.nav_disclaimer){
             search_box.setVisibility(View.GONE);
+            order_dialog.setVisibility(View.GONE);
             loadfragment(new Disclaimer());
             getSupportActionBar().hide();
         } else if (item.getItemId() == R.id.nav_myorder) {
             search_box.setVisibility(View.GONE);
+            order_dialog.setVisibility(View.GONE);
             loadfragment(new MyOrder());
             getSupportActionBar().hide();
         } else if (item.getItemId() == R.id.nav_logout) {
@@ -257,6 +328,7 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             d.show();
         } else if (item.getItemId() == R.id.nav_contactus) {
             search_box.setVisibility(View.GONE);
+            order_dialog.setVisibility(View.GONE);
             loadfragment(new ContactUs());
             getSupportActionBar().hide();
         } else if (item.getItemId() == R.id.nav_share) {

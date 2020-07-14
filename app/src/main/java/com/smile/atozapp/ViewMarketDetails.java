@@ -2,13 +2,20 @@ package com.smile.atozapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -18,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.smile.atozapp.controller.AppUtil;
+import com.smile.atozapp.controller.TempData;
 import com.smile.atozapp.models.MarketHold;
 import com.smile.atozapp.parameters.MarketParameters;
 
@@ -27,6 +35,10 @@ public class ViewMarketDetails extends AppCompatActivity {
     TextView totalcount;
     ConstraintLayout nodata;
     TextView tryagain;
+    Toolbar mytoolbar;
+    ConstraintLayout order_dialog;
+    TextView dialog_title;
+    Button dialog_complete;
 
     Query q;
 
@@ -34,6 +46,22 @@ public class ViewMarketDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_market_details);
+
+        order_dialog = findViewById(R.id.view_market_didalog);
+        dialog_title = order_dialog.findViewById(R.id.view_market_d_title);
+        dialog_complete = order_dialog.findViewById(R.id.view_market_d_conformbtn);
+
+        mytoolbar = findViewById(R.id.view_market_toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mytoolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+
+        mytoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         list = findViewById(R.id.view_market_list);
         totalcount = findViewById(R.id.view_market_total);
@@ -79,6 +107,30 @@ public class ViewMarketDetails extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        AppUtil.CARTURL.child(new TempData(ViewMarketDetails.this).getuid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null){
+                    dialog_title.setText("Total Cart Items "+ snapshot.getChildrenCount());
+                    order_dialog.setVisibility(View.VISIBLE);
+                }else{
+                    order_dialog.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        dialog_complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext() , MyCart.class));
+            }
+        });
 
     }
 

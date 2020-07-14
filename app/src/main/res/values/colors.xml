@@ -12,4 +12,17 @@
     <color name="green">#4CAF50</color>
     <color name="yellow">#FFEB3B</color>
     <color name="blue">#2196F3</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#fff</color>
+    <color name="dot_light_screen2">#fff</color>
+    <color name="dot_light_screen3">#fff</color>
+    <color name="dot_light_screen4">#fff</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#000</color>
+    <color name="dot_dark_screen2">#000</color>
+    <color name="dot_dark_screen3">#000</color>
+    <color name="dot_dark_screen4">#000</color>
+
 </resources>

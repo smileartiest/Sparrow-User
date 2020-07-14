@@ -44,15 +44,10 @@ public class MarketHold extends RecyclerView.ViewHolder {
         TextView category = itemView.findViewById(R.id.row_market_category);
         final Spinner qntyty = itemView.findViewById(R.id.row_market_qnty);
         final TextView price = itemView.findViewById(R.id.row_market_price);
-        final TextView qntrytext = itemView.findViewById(R.id.row_market_totalqn);
-        final LinearLayout qntytybox = itemView.findViewById(R.id.row_market_qntytybox);
-        final TextView addicon = itemView.findViewById(R.id.row_market_addicon);
-        final TextView removeicon = itemView.findViewById(R.id.row_market_removeicon);
+        final ImageView complete_sts = itemView.findViewById(R.id.row_market_complete);
         TextView stocksts = itemView.findViewById(R.id.row_market_stock);
 
         final TempData td = new TempData(c1);
-        final TempOrder to = new TempOrder(c1);
-
 
         final Button addbtn = itemView.findViewById(R.id.row_market_addbtn);
 
@@ -70,56 +65,15 @@ public class MarketHold extends RecyclerView.ViewHolder {
         if(stock1.equals("outstock")){
             stocksts.setVisibility(View.VISIBLE);
             addbtn.setVisibility(View.INVISIBLE);
-            qntytybox.setVisibility(View.INVISIBLE);
         }else{
             stocksts.setVisibility(View.GONE);
         }
 
-        qntyty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                price.setText(amlist[position]);
-                Query q = AppUtil.CARTURL.child(td.getuid()).orderByChild("am").equalTo(amlist[position]);
-                q.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.getValue() != null) {
-                            addbtn.setVisibility(View.INVISIBLE);
-                            qntytybox.setVisibility(View.VISIBLE);
-                            qntrytext.setText("2");
-                            if (dataSnapshot.getChildrenCount() == 1) {
-                                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                    qntrytext.setText(data.child("qnt").getValue().toString());
-                                }
-                            } else if (dataSnapshot.getChildrenCount() == 2) {
-
-                            }
-                        } else {
-                            if(stock1.equals("instock")) {
-                                addbtn.setVisibility(View.VISIBLE);
-                                qntytybox.setVisibility(View.INVISIBLE);
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addbtn.setVisibility(View.INVISIBLE);
-                qntytybox.setVisibility(View.VISIBLE);
-                qntrytext.setText("1");
+                addbtn.setVisibility(View.GONE);
+                complete_sts.setVisibility(View.VISIBLE);
                 String key = AppUtil.CARTURL.push().getKey();
                 CartParameters c = new CartParameters(key, id, mpic, mname, mcatg, price.getText().toString(), qntyty.getSelectedItem().toString(), "1");
                 AppUtil.CARTURL.child(new TempData(c1).getuid()).child(key).setValue(c);
@@ -127,51 +81,18 @@ public class MarketHold extends RecyclerView.ViewHolder {
             }
         });
 
-        addicon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int temp = Integer.parseInt(qntrytext.getText().toString()) + 1;
-                qntrytext.setText(String.valueOf(temp));
-                AppUtil.CARTURL.child(td.getuid()).child(to.getcid()).child("qnt").setValue(String.valueOf(temp));
-            }
-        });
-        removeicon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.parseInt(qntrytext.getText().toString()) > 0) {
-                    int temp = Integer.parseInt(qntrytext.getText().toString()) - 1;
-                    qntrytext.setText(String.valueOf(temp));
-                    AppUtil.CARTURL.child(td.getuid()).child(to.getcid()).child("qnt").setValue(String.valueOf(temp));
-
-                    if (temp == 0) {
-                        AppUtil.CARTURL.child(td.getuid()).child(to.getcid()).removeValue();
-                    }
-
-                } else if (Integer.parseInt(qntrytext.getText().toString()) == 0) {
-                    AppUtil.CARTURL.child(td.getuid()).child(to.getcid()).removeValue();
-                }
-            }
-        });
-
         Query q = AppUtil.CARTURL.child(td.getuid()).orderByChild("mid").equalTo(id);
+
         q.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
                     addbtn.setVisibility(View.INVISIBLE);
-                    qntytybox.setVisibility(View.VISIBLE);
-                    qntrytext.setText("2");
-                    if (dataSnapshot.getChildrenCount() == 1) {
-                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            qntrytext.setText(data.child("qnt").getValue().toString());
-                        }
-                    } else if (dataSnapshot.getChildrenCount() == 2) {
-
-                    }
+                    complete_sts.setVisibility(View.VISIBLE);
                 } else {
                     if(stock1.equals("instock")) {
                         addbtn.setVisibility(View.VISIBLE);
-                        qntytybox.setVisibility(View.INVISIBLE);
+                        complete_sts.setVisibility(View.INVISIBLE);
                     }
                 }
             }

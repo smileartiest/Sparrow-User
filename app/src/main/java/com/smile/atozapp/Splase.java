@@ -22,8 +22,6 @@ public class Splase extends AppCompatActivity {
     Runnable r;
     Handler h;
 
-    TextView permissionbtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +31,26 @@ public class Splase extends AppCompatActivity {
         r = new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(getApplicationContext() , Login.class));finish();
+                startActivity(new Intent(getApplicationContext() , View_Tutorial.class));finishAffinity();
             }
         };
-        h.postDelayed(r,3000);
+
         if(new TempData(Splase.this).getuid()!=null) {
             Log.d("UID", new TempData(Splase.this).getuid());
         }
 
+        if(new TempData(Splase.this).getlogsts()!=null){
+            if (new TempData(Splase.this).getlogsts().equals("login")) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(getApplicationContext(), LoginMain.class));finishAffinity();
+                    }
+                },2000);
+            }
+        }else{
+            h.postDelayed(r,3000);
+        }
         if(!checkLocationPermission()){
             checkLocationPermission();
         }

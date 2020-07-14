@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     app:cardElevation="1dp"
-    android:layout_margin="1dp"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +20,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:padding="1dp"
+            android:background="@drawable/border_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/row_market_name"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,41 +106,6 @@
             app:layout_constraintStart_toEndOf="@+id/row_market_pic"
             app:layout_constraintTop_toBottomOf="@+id/row_market_qnty" />
 
-        <LinearLayout
-
-            android:id="@+id/row_market_qntytybox"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <TextView
-                android:id="@+id/row_market_removeicon"
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/borderred"
-                android:drawableRight="@drawable/remove_red_icon" />
-
-            <TextView
-                android:id="@+id/row_market_totalqn"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="0" />
-
-            <TextView
-                android:id="@+id/row_market_addicon"
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/bordergreen"
-                android:drawableRight="@drawable/add_green_icon" />
-
-        </LinearLayout>
-
         <TextView
             android:id="@+id/row_market_stock"
             android:layout_width="0dp"
@@ -154,6 +120,19 @@
             app:layout_constraintBottom_toBottomOf="@+id/row_market_pic"
             app:layout_constraintEnd_toEndOf="@+id/row_market_pic"
             app:layout_constraintStart_toStartOf="@+id/row_market_pic" />
+
+        <ImageView
+            android:id="@+id/row_market_complete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/row_market_price"
+            app:srcCompat="@drawable/complete_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

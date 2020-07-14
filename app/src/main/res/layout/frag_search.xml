@@ -24,7 +24,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/searchbg"
             android:fontFamily="serif"
-            android:hint="Search products available 1000 +"
+            android:hint="Search 10,000 + products available"
             android:paddingLeft="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/block"

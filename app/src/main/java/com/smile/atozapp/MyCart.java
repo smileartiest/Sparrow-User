@@ -2,12 +2,14 @@ package com.smile.atozapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -40,6 +42,9 @@ public class MyCart extends AppCompatActivity {
     StringBuilder amlist;
     StringBuilder sizelist;
     StringBuilder qntylist;
+
+    Toolbar mytoolbar;
+
     TempData t;
 
     ProgressDialog pd;
@@ -48,6 +53,11 @@ public class MyCart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_cart);
+
+        mytoolbar = findViewById(R.id.cart_toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mytoolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
 
         cartlist = findViewById(R.id.cart_list);
         remove = findViewById(R.id.cart_remove);
@@ -63,6 +73,13 @@ public class MyCart extends AppCompatActivity {
         pd = new ProgressDialog(MyCart.this);
         pd.setTitle("Loading");
         pd.setMessage("Please wait.....");
+
+        mytoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         getcount();
 
@@ -191,4 +208,9 @@ public class MyCart extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
