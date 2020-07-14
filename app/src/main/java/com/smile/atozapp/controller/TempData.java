@@ -36,7 +36,8 @@ public class TempData {
         ed.clear().apply();
     }
 
-    public void addlocation(String city , String add){
+    public void addlocation( String id, String city , String add){
+        ed.putString("id" , id);
         ed.putString("city",city);
         ed.putString("add" , add);
         ed.apply();
@@ -47,6 +48,10 @@ public class TempData {
     }
 
     public String getadd(){
+        return sharedPreferences.getString("add",null);
+    }
+
+    public String getaid(){
         return sharedPreferences.getString("add",null);
     }
 

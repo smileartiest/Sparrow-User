@@ -60,9 +60,6 @@
             android:name=".ViewMarketDetails"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name=".CompleteOrder"
-            android:theme="@style/AppTheme1" />
-        <activity
             android:name=".addressdetails.AddressPage"
             android:theme="@style/AppTheme1" />
         <activity

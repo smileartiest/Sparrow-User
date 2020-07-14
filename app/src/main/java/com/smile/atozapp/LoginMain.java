@@ -5,31 +5,21 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.Manifest;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,11 +43,11 @@ import com.smile.atozapp.fragment.Search;
 
 public class LoginMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView locantion_city,location_local,search_products;
-    ConstraintLayout location_card,search_box;
+    TextView locantion_city,location_local;
+    ConstraintLayout location_card;
 
     ConstraintLayout order_dialog;
-    TextView dialog_title;
+    TextView dialog_title,dialog_message;
     Button dialog_complete;
 
     Toolbar myaction;
@@ -75,28 +65,23 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
 
             switch (item.getItemId()) {
                 case R.id.bot_nav_home:
-                    search_box.setVisibility(View.VISIBLE);
                     loadfragment(new Home());
                     getSupportActionBar().show();
                     return true;
                 case R.id.bot_nav_notification:
-                    search_box.setVisibility(View.GONE);
                     order_dialog.setVisibility(View.GONE);
                     return true;
                 case R.id.bot_nav_category:
-                    search_box.setVisibility(View.GONE);
                     order_dialog.setVisibility(View.GONE);
                     loadfragment(new Category());
                     getSupportActionBar().hide();
                     return true;
                 case R.id.bot_nav_search:
-                    search_box.setVisibility(View.GONE);
                     order_dialog.setVisibility(View.GONE);
                     loadfragment(new Search());
                     getSupportActionBar().hide();
                     return true;
                 case R.id.bot_nav_offer:
-                    search_box.setVisibility(View.GONE);
                     order_dialog.setVisibility(View.GONE);
                     loadfragment(new Offer());
                     getSupportActionBar().hide();
@@ -116,14 +101,13 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
         getSupportActionBar().show();
 
         order_dialog = findViewById(R.id.main_didalog);
-        dialog_title = order_dialog.findViewById(R.id.main_d_title);
-        dialog_complete = order_dialog.findViewById(R.id.main_d_conformbtn);
+        dialog_title = findViewById(R.id.main_d_title);
+        dialog_message = findViewById(R.id.main_d_message);
+        dialog_complete = findViewById(R.id.main_d_conformbtn);
 
         locantion_city = findViewById(R.id.main_city);
         location_local = findViewById(R.id.main_local);
         location_card = findViewById(R.id.main_address);
-        search_products = findViewById(R.id.main_search);
-        search_box = findViewById(R.id.main_search_box);
 
         t = new TempData(LoginMain.this);
 
@@ -181,7 +165,6 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
         });
 
         loadfragment(new Home());
-
     }
 
     public void loadfragment(Fragment frag) {
@@ -207,15 +190,6 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginMain.this, MyLocation.class));
-            }
-        });
-
-        search_products.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                search_box.setVisibility(View.GONE);
-                loadfragment(new Search());
-                getSupportActionBar().hide();
             }
         });
 
@@ -259,7 +233,6 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
                 startActivity(new Intent(getApplicationContext(), MyCart.class));
                 break;
             case R.id.login_menu_myprofile:
-                search_box.setVisibility(View.GONE);
                 order_dialog.setVisibility(View.GONE);
                 loadfragment(new MyAccount());
                 getSupportActionBar().hide();
@@ -273,33 +246,27 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
         // Handle navigation view item clicks here.
 
         if (item.getItemId() == R.id.nav_home) {
-            search_box.setVisibility(View.VISIBLE);
             loadfragment(new Home());
             getSupportActionBar().show();
         } else if (item.getItemId() == R.id.nav_category) {
-            search_box.setVisibility(View.GONE);
             order_dialog.setVisibility(View.GONE);
             loadfragment(new Category());
             getSupportActionBar().hide();
         } else if (item.getItemId() == R.id.nav_offer) {
-            search_box.setVisibility(View.GONE);
             order_dialog.setVisibility(View.GONE);
             loadfragment(new Offer());
             getSupportActionBar().hide();
         } else if(item.getItemId() == R.id.nav_myprofile){
-            search_box.setVisibility(View.GONE);
             order_dialog.setVisibility(View.GONE);
             loadfragment(new MyAccount());
             getSupportActionBar().hide();
         } else if(item.getItemId() == R.id.nav_cart){
             startActivity(new Intent(getApplicationContext(), MyCart.class));
         }else if(item.getItemId() == R.id.nav_disclaimer){
-            search_box.setVisibility(View.GONE);
             order_dialog.setVisibility(View.GONE);
             loadfragment(new Disclaimer());
             getSupportActionBar().hide();
         } else if (item.getItemId() == R.id.nav_myorder) {
-            search_box.setVisibility(View.GONE);
             order_dialog.setVisibility(View.GONE);
             loadfragment(new MyOrder());
             getSupportActionBar().hide();
@@ -327,7 +294,6 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             });
             d.show();
         } else if (item.getItemId() == R.id.nav_contactus) {
-            search_box.setVisibility(View.GONE);
             order_dialog.setVisibility(View.GONE);
             loadfragment(new ContactUs());
             getSupportActionBar().hide();

@@ -3,189 +3,87 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="1dp"
-    android:layout_marginRight="1dp"
-    android:layout_marginBottom="8dp"
-    app:cardElevation="3dp">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gold">
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:background="@color/white"
+        <TextView
+            android:id="@+id/cart_row_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="serif"
+            android:lines="1"
+            android:text="Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/block"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cart_row_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="serif"
+            android:lines="1"
+            android:text="type"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/cart_row_name"
+            app:layout_constraintTop_toBottomOf="@+id/cart_row_name" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/cart_row_pic"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/cart_row_buy"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/add_address_icon" />
+            <TextView
+                android:id="@+id/cart_row_remove"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/borderred"
+                android:paddingLeft="3dp"
+                android:drawableLeft="@drawable/remove_red_icon" />
 
             <TextView
-                android:id="@+id/cart_row_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="serif"
-                android:text="Name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView51"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/cart_row_type"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="serif"
-                android:text="type"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/cart_row_name"
-                app:layout_constraintTop_toBottomOf="@+id/cart_row_name" />
-
-            <TextView
-                android:id="@+id/cart_row_size"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="serif"
-                android:text="size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/cart_row_type"
-                app:layout_constraintTop_toBottomOf="@+id/cart_row_type" />
-
-            <TextView
-                android:id="@+id/cart_row_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="serif"
-                android:text="amount"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/cart_row_size"
-                app:layout_constraintTop_toBottomOf="@+id/cart_row_size" />
-
-            <TextView
-                android:id="@+id/cart_row_buy"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bordertgold"
+                android:id="@+id/cart_row_count"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="serif"
                 android:gravity="center"
-                android:text="BUY"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/cart_row_pic"
-                app:layout_constraintStart_toStartOf="@+id/cart_row_pic"
-                app:layout_constraintTop_toBottomOf="@+id/cart_row_pic" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <TextView
-                    android:id="@+id/cart_row_remove"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/borderred"
-                    android:drawableLeft="@drawable/remove_red_icon"
-                    android:paddingLeft="10dp" />
-
-                <TextView
-                    android:id="@+id/cart_row_count"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:fontFamily="serif"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/cart_row_add"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bordergreen"
-                    android:drawableRight="@drawable/add_green_icon"
-                    android:paddingRight="10dp" />
-
-            </LinearLayout>
+                android:text="0"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView51"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="serif"
-                android:text="Name   "
-                app:layout_constraintEnd_toStartOf="@+id/cart_row_name"
-                app:layout_constraintStart_toEndOf="@+id/cart_row_pic"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/cart_row_add"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/bordergreen"
+                android:paddingRight="3dp"
+                android:drawableRight="@drawable/add_green_icon"/>
 
-            <TextView
-                android:id="@+id/textView57"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="serif"
-                android:text="Type "
-                app:layout_constraintEnd_toEndOf="@+id/textView51"
-                app:layout_constraintStart_toEndOf="@+id/cart_row_pic"
-                app:layout_constraintTop_toBottomOf="@+id/textView51" />
-
-            <TextView
-                android:id="@+id/textView65"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Size "
-                app:layout_constraintEnd_toEndOf="@+id/textView57"
-                app:layout_constraintStart_toEndOf="@+id/cart_row_pic"
-                app:layout_constraintTop_toBottomOf="@+id/textView57" />
-
-            <TextView
-                android:id="@+id/textView66"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Price $ "
-                app:layout_constraintEnd_toEndOf="@+id/textView65"
-                app:layout_constraintStart_toEndOf="@+id/cart_row_pic"
-                app:layout_constraintTop_toBottomOf="@+id/textView65" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

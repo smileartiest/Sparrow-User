@@ -1,5 +1,6 @@
 package com.smile.atozapp.controller;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -17,5 +18,6 @@ public class AppUtil {
     public static DatabaseReference CONTURL = FirebaseDatabase.getInstance().getReference("contactus");
     public static DatabaseReference DRESSPICURL = FirebaseDatabase.getInstance().getReference("dresspic");
     public static DatabaseReference STSURL = FirebaseDatabase.getInstance().getReference("storestatus");
+    public static DatabaseReference CHARGES = FirebaseDatabase.getInstance().getReference("charge");
 
 }

@@ -1,10 +1,8 @@
 package com.smile.atozapp.addressdetails;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,15 +15,10 @@ import android.widget.Button;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.smile.atozapp.CompleteOrder;
 import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.controller.TempData;
-import com.smile.atozapp.controller.TempOrder;
 import com.smile.atozapp.models.AddressHold;
 import com.smile.atozapp.parameters.AddressParameters;
 
@@ -75,7 +68,7 @@ public class AddressPage extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(AddressHold addressHold, AddressParameters addressParameters, int i) {
-                addressHold.setdetails(getApplicationContext() , addressParameters.getId() , addressParameters.getUid() , addressParameters.getLat() , addressParameters.getLang() , addressParameters.getAddress() , addressParameters.getCno());
+                addressHold.setdetails(getApplicationContext() , addressParameters.getId() , addressParameters.getCity() , addressParameters.getLat() , addressParameters.getLang() , addressParameters.getAddress() , addressParameters.getCno());
             }
         };
         list.setAdapter(frecycle);
@@ -97,8 +90,8 @@ public class AddressPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(new TempOrder(AddressPage.this).getaddress()!=null){
-                    startActivity(new Intent(getApplicationContext() , CompleteOrder.class));finish();
+                if(new TempData(AddressPage.this).getaid()!=null){
+                    finish();
                 }else {
                     AlertDialog.Builder ad = new AlertDialog.Builder(AddressPage.this);
                     ad.setTitle("Oops !!");

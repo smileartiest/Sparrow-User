@@ -98,7 +98,7 @@ public class MyLocation extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(MyLocationHold mh, AddressParameters ap, int i) {
-                mh.setdetails(MyLocation.this, ap.getAddress(), ap.getCity());
+                mh.setdetails(MyLocation.this, ap.getId() , ap.getAddress(), ap.getCity());
             }
         };
         locationlist.setAdapter(frecycle);

@@ -17,7 +17,7 @@ public class MyLocationHold extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public void setdetails(final  Context c1 ,final String address1 ,final String city1){
+    public void setdetails(final  Context c1 ,final String aid1 ,final String address1 ,final String city1){
         TextView city = itemView.findViewById(R.id.row_location_city);
         TextView area = itemView.findViewById(R.id.row_location_area);
         ImageView pic = itemView.findViewById(R.id.row_location_img);
@@ -27,7 +27,7 @@ public class MyLocationHold extends RecyclerView.ViewHolder {
         city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TempData(c1).addlocation(city1,address1);
+                new TempData(c1).addlocation( aid1,city1,address1);
                 openConformationDialog();
             }
         });

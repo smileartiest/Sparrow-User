@@ -38,7 +38,7 @@ public class Home extends Fragment {
     View v;
     SliderView sliderView;
     ArrayList<String> imglist = new ArrayList<>();
-    TextView viewall1,viewall2,viewall3;
+    TextView viewall_market,viewall_food,viewall_market1,viewall_dress,viewall_electronics;
 
     public Home() {
     }
@@ -49,9 +49,12 @@ public class Home extends Fragment {
 
         v = inflater.inflate(R.layout.frag_home , container , false);
         sliderView = v.findViewById(R.id.home_brandSlider);
-        viewall1 = v.findViewById(R.id.home_viewall1);
-        viewall2 = v.findViewById(R.id.home_viewall2);
-        viewall3 = v.findViewById(R.id.home_viewall3);
+
+        viewall_market = v.findViewById(R.id.home_viewall_market);
+        viewall_food = v.findViewById(R.id.home_viewall_market_foods);
+        viewall_market1 = v.findViewById(R.id.home_viewall_market1);
+        viewall_electronics = v.findViewById(R.id.home_viewall_electronics);
+        viewall_dress = v.findViewById(R.id.home_viewall_dress);
 
         getimages();
         return v;
@@ -67,21 +70,35 @@ public class Home extends Fragment {
     public void onResume() {
         super.onResume();
 
-        viewall1.setOnClickListener(new View.OnClickListener() {
+        viewall_market.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","all"));
             }
         });
 
-        viewall2.setOnClickListener(new View.OnClickListener() {
+        viewall_market1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","all"));
             }
         });
 
-        viewall3.setOnClickListener(new View.OnClickListener() {
+        viewall_food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","all"));
+            }
+        });
+
+        viewall_electronics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("k","all"));
+            }
+        });
+
+        viewall_dress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("k","all"));

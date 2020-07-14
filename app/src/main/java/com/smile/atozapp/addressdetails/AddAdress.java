@@ -148,7 +148,6 @@ public class AddAdress extends FragmentActivity implements GoogleMap.OnMyLocatio
                             String key = AppUtil.ADDRESURL.push().getKey();
                             AddressParameters ad = new AddressParameters(key, t.getuid(), String.valueOf(currentloc.getLatitude()), String.valueOf(currentloc.getLongitude()), cityname.getText().toString(), fno1 + "," + area1, cno1);
                             AppUtil.ADDRESURL.child(t.getuid()).child(key).setValue(ad);
-                            t.addlocation(cityname.getText().toString(), fno1 + "," + area1);
                             finish();
                         } else {
                             cno.getEditText().setError("enter valid detail");

@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
+import com.smile.atozapp.controller.TempData;
 import com.smile.atozapp.controller.TempOrder;
 
 public class AddressHold extends RecyclerView.ViewHolder {
@@ -23,7 +24,7 @@ public class AddressHold extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public void setdetails(final Context c1 ,final String id1,final String uid1,final String lat1,final String lang1,final String address1 , final String cno1 )
+    public void setdetails(final Context c1 ,final String id1,final String city1,final String lat1,final String lang1,final String address1 , final String cno1 )
     {
         final ConstraintLayout card = itemView.findViewById(R.id.address_row_card);
         TextView address = itemView.findViewById(R.id.address_row_add);
@@ -38,7 +39,7 @@ public class AddressHold extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 card.setBackgroundResource(R.drawable.text_select);
-                AppUtil.ORDERURl.child(to.getoid()).child("addres").setValue(id1);
+                new TempData(c1).addlocation( id1,city1,address1);
                 to.addaddress(id1);
             }
         });
