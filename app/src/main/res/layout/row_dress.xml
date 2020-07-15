@@ -16,7 +16,7 @@
             android:id="@+id/drow_pic"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             android:padding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,101 +27,79 @@
             android:id="@+id/drow_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="serif"
+            android:lines="1"
             android:text="Dress Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drow_pic" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/drow_amount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="serif"
-            android:text="$"
-            android:textColor="#000"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/drow_amount"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/drow_amount" />
-
-        <TextView
-            android:id="@+id/drow_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="serif"
+            android:lines="1"
             android:text="1500"
-            android:textColor="#E91E63"
-            android:textSize="15sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#4CAF50"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/drow_offer"
-            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drow_type" />
 
         <TextView
             android:id="@+id/drow_type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="serif"
+            android:lines="1"
             android:text="Dress Type"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drow_name" />
 
         <TextView
-            android:id="@+id/drow_offer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="serif"
-            android:text="50 % offer"
-            android:textColor="#4CAF50"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/drow_amount"
-            app:layout_constraintTop_toBottomOf="@+id/drow_type" />
-
-        <ImageView
-            android:id="@+id/drow_likebtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            android:backgroundTint="#fff"
-            app:borderWidth="0dp"
-            app:elevation="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/nolike_icon" />
-
-        <TextView
             android:id="@+id/drow_stock"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:fontFamily="serif"
-            android:text="Out Of Stock"
+            android:layout_height="60dp"
             android:background="@color/gray"
-            android:textColor="@color/block"
+            android:fontFamily="serif"
             android:gravity="center"
+            android:padding="5dp"
+            android:text="Out Of Stock"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/block"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/drow_pic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/drow_loading_gif"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="8dp"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/dress_loading"
+            app:layout_constraintBottom_toTopOf="@+id/drow_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

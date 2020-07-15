@@ -7,11 +7,13 @@
     <color name="white">#ffffff</color>
     <color name="block">#000000</color>
     <color name="gray">#EAE7E7</color>
+    <color name="light_gray">#F1F1F1</color>
     <color name="red">#FF1100</color>
     <color name="gold">#F44336</color>
     <color name="green">#4CAF50</color>
     <color name="yellow">#FFEB3B</color>
     <color name="blue">#2196F3</color>
+    <color name="smp">#FF888888</color>
 
     <!-- dots active colors -->
     <color name="dot_light_screen1">#fff</color>

@@ -41,7 +41,7 @@ import java.util.concurrent.TimeUnit;
 
 public class OtpPage extends AppCompatActivity {
 
-    TextInputLayout otp_txt;
+    EditText otp_txt;
     TextView otp_time;
     Button verify_btn;
     LottieAnimationView animationView;
@@ -107,12 +107,12 @@ public class OtpPage extends AppCompatActivity {
                 else if(verify_btn.getText().toString().equals("TRY AFTER SOME TIME")){
                     finish();
                 } else{
-                    if(TextUtils.isEmpty(otp_txt.getEditText().getText().toString())){
+                    if(TextUtils.isEmpty(otp_txt.getText().toString())){
                         Snackbar.make(v,"Please enter OTP" ,Snackbar.LENGTH_SHORT).show();
                     }else{
                         if(verify_code!=null) {
                             count_time.cancel();
-                            if (otp_txt.getEditText().getText().toString().equals(verify_code)) {
+                            if (otp_txt.getText().toString().equals(verify_code)) {
                                 animationView.setAnimation(R.raw.otp_verification);
                                 animationView.playAnimation();
                                 animationView.loop(true);

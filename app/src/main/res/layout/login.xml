@@ -11,7 +11,10 @@
         android:id="@+id/lottieAnimationView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,24 +28,25 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/border_gray_line"
         android:paddingLeft="10dp"
-        android:paddingTop="8dp"
+        android:paddingTop="5dp"
         android:paddingRight="10dp"
-        android:paddingBottom="5dp"
+        android:paddingBottom="1dp"
         app:layout_constraintBottom_toTopOf="@+id/login_loginbtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView47">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:background="@color/white"
             android:fontFamily="serif"
             android:hint="Mobile Number"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textColor="@color/colorPrimaryDark" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -55,7 +59,6 @@
         android:background="@drawable/buttonred"
         android:drawableRight="@drawable/right_arrow_white"
         android:fontFamily="serif"
-        android:paddingRight="25dp"
         android:text="CONTINUE"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#fff"

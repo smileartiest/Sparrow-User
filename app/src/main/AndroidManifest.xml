@@ -38,18 +38,22 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".Track_Order"
+            android:label="@string/title_activity_track__order"></activity>
+        <activity
             android:name=".CheckLocation"
-            android:label="@string/title_activity_check_location"></activity>
+            android:label="@string/title_activity_check_location" />
         <activity
             android:name=".View_Tutorial"
             android:theme="@style/AppTheme1" />
         <activity
             android:name=".ViewMoreDetails"
-            android:label="@string/title_activity_view_more_details" />
+            android:label="@string/title_activity_view_more_details"
+            android:theme="@style/AppTheme1"/>
         <activity
             android:name=".MyLocation"
-            android:theme="@style/AppTheme1"
-            android:label="@string/title_activity_my_location" />
+            android:label="@string/title_activity_my_location"
+            android:theme="@style/AppTheme1" />
         <activity
             android:name=".ViewDressDetails"
             android:theme="@style/AppTheme1" />
@@ -58,9 +62,6 @@
             android:theme="@style/AppTheme1" />
         <activity
             android:name=".ViewMarketDetails"
-            android:theme="@style/AppTheme1" />
-        <activity
-            android:name=".addressdetails.AddressPage"
             android:theme="@style/AppTheme1" />
         <activity
             android:name=".addressdetails.AddAdress"

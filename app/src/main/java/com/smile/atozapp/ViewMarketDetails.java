@@ -32,7 +32,7 @@ import com.smile.atozapp.parameters.MarketParameters;
 public class ViewMarketDetails extends AppCompatActivity {
 
     RecyclerView list;
-    TextView totalcount;
+    TextView totalcount,page_title;
     ConstraintLayout nodata;
     TextView tryagain;
     Toolbar mytoolbar;
@@ -48,8 +48,9 @@ public class ViewMarketDetails extends AppCompatActivity {
         setContentView(R.layout.view_market_details);
 
         order_dialog = findViewById(R.id.view_market_didalog);
-        dialog_title = order_dialog.findViewById(R.id.view_market_d_title);
-        dialog_complete = order_dialog.findViewById(R.id.view_market_d_conformbtn);
+        dialog_title = findViewById(R.id.view_market_d_title);
+        dialog_complete = findViewById(R.id.view_market_d_conformbtn);
+        page_title = findViewById(R.id.view_market_title);
 
         mytoolbar = findViewById(R.id.view_market_toolbar);
         setSupportActionBar(mytoolbar);
@@ -63,6 +64,10 @@ public class ViewMarketDetails extends AppCompatActivity {
             }
         });
 
+        if(getIntent().hasExtra("tit")){
+            page_title.setText(getIntent().getStringExtra("tit"));
+        }
+
         list = findViewById(R.id.view_market_list);
         totalcount = findViewById(R.id.view_market_total);
         nodata = findViewById(R.id.view_market_noitem);
@@ -75,6 +80,7 @@ public class ViewMarketDetails extends AppCompatActivity {
             q = AppUtil.MARKETURL;
         } else {
             q = AppUtil.MARKETURL.orderByChild("mcatg").equalTo(getIntent().getStringExtra("k"));
+            page_title.setText(getIntent().getStringExtra("k"));
         }
 
         tryagain.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +145,7 @@ public class ViewMarketDetails extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    totalcount.setText("Total search products : " + dataSnapshot.getChildrenCount());
+                    totalcount.setText("Total products  " + dataSnapshot.getChildrenCount());
                 } else {
                     totalcount.setText("Total search 0");
                     nodata.setVisibility(View.VISIBLE);

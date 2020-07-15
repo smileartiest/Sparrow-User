@@ -26,5 +26,6 @@
         <item>@color/dot_dark_screen3</item>
         <item>@color/dot_dark_screen4</item>
     </array>
+    <string name="title_activity_track__order">Map</string>
 
 </resources>

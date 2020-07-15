@@ -8,25 +8,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.smile.atozapp.addressdetails.AddressPage;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.controller.TempData;
 import com.smile.atozapp.controller.TempOrder;
 import com.smile.atozapp.controller.TimeDate;
+import com.smile.atozapp.helper.CSAlertDialog;
 import com.smile.atozapp.models.CartHold;
 import com.smile.atozapp.parameters.CartParameters;
 import com.smile.atozapp.parameters.ChargeParameters;
@@ -64,6 +69,8 @@ public class MyCart extends AppCompatActivity {
     TempData td;
     TempOrder to;
 
+    CSAlertDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +80,8 @@ public class MyCart extends AppCompatActivity {
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mytoolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+
+        dialog = new CSAlertDialog(MyCart.this);
 
         cartlist = findViewById(R.id.cart_list);
         remove = findViewById(R.id.cart_remove);
@@ -133,7 +142,7 @@ public class MyCart extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    count.setText("Count . " + dataSnapshot.getChildrenCount());
+                    count.setText("item count  " + dataSnapshot.getChildrenCount()+".");
                     order.setVisibility(View.VISIBLE);
                     remove.setVisibility(View.VISIBLE);
                     address_box.setVisibility(View.VISIBLE);
@@ -163,7 +172,20 @@ public class MyCart extends AppCompatActivity {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppUtil.CARTURL.child(t.getuid()).removeValue();
+                CFAlertDialog.Builder builder = new CFAlertDialog.Builder(MyCart.this);
+                builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+                builder.setIcon(R.drawable.sparrowiconsmall);
+                builder.setCornerRadius(20);
+                builder.setTitle("Hey , There !");
+                builder.setMessage("Sure you want to cancel the order. If you click ok all cart items are cleared.");
+                builder.addButton("OK", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog1, int which) {
+                        dialog1.dismiss();
+                        AppUtil.CARTURL.child(t.getuid()).removeValue();
+                    }
+                });
+                builder.show();
             }
         });
 
@@ -179,25 +201,10 @@ public class MyCart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(td.getaid()!=null) {
-                    TimeDate timedate = new TimeDate(MyCart.this);
-                    DatabaseReference df = AppUtil.ORDERURl;
-                    String key = df.push().getKey();
-                    df.child(key).child("id").setValue(key);
-                    df.child(key).child("uid").setValue(t.getuid());
-                    df.child(key).child("name").setValue(namelist.toString());
-                    df.child(key).child("size").setValue(sizelist.toString());
-                    df.child(key).child("qnt").setValue(qntylist.toString());
-                    df.child(key).child("am").setValue(amlist.toString());
-                    df.child(key).child("addres").setValue(td.getaid());
-                    df.child(key).child("pmode").setValue("cashon");
-                    df.child(key).child("sts").setValue("new");
-                    df.child(key).child("odate").setValue(timedate.getdate());
-                    df.child(key).child("otime").setValue(timedate.gettime());
-                    df.child(key).child("bam").setValue(total_amount.getText().toString());
-                    AppUtil.CARTURL.child(td.getuid()).removeValue();
-                    to.tclear();
+                    completedialog();
                 }else{
-                    Toast.makeText(MyCart.this, "Choose address first", Toast.LENGTH_SHORT).show();
+                    dialog.CancelDialog();
+                    Snackbar.make(v , "Choose address first" , Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -215,9 +222,61 @@ public class MyCart extends AppCompatActivity {
         choose_address_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), AddressPage.class));
+                startActivity(new Intent(getApplicationContext(), MyLocation.class));
             }
         });
+    }
+
+    void completedialog() {
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(MyCart.this);
+        builder.setCornerRadius(20);
+        builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+        builder.setContentImageDrawable(R.drawable.happy_emoji_icon);
+        builder.setTextGravity(Gravity.CENTER);
+        builder.setTitle("Please confirm your Order. Your Pay for this order Rs. "+total_amount.getText().toString());
+        builder.addButton("YES", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                setOrder();
+            }
+        });
+        builder.addButton("NOT NOW", -1, -1, CFAlertDialog.CFAlertActionStyle.DEFAULT, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    void setOrder(){
+        dialog.ShowDialog();
+        TimeDate timedate = new TimeDate(MyCart.this);
+        DatabaseReference df = AppUtil.ORDERURl;
+        final String key = df.push().getKey();
+        df.child(key).child("id").setValue(key);
+        df.child(key).child("uid").setValue(t.getuid());
+        df.child(key).child("name").setValue(namelist.toString());
+        df.child(key).child("size").setValue(sizelist.toString());
+        df.child(key).child("qnt").setValue(qntylist.toString());
+        df.child(key).child("am").setValue(amlist.toString());
+        df.child(key).child("addres").setValue(td.getaid());
+        df.child(key).child("pmode").setValue("cashon");
+        df.child(key).child("sts").setValue("new");
+        df.child(key).child("odate").setValue(timedate.getdate());
+        df.child(key).child("otime").setValue(timedate.gettime());
+        df.child(key).child("bam").setValue(total_amount.getText().toString());
+        AppUtil.CARTURL.child(td.getuid()).removeValue();
+        to.tclear();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                to.addoid(key);
+                dialog.CancelDialog();
+                startActivity(new Intent(getApplicationContext() , LoginMain.class));finishAffinity();
+            }
+        },2000);
     }
 
     public void getList() {
@@ -297,6 +356,7 @@ public class MyCart extends AppCompatActivity {
         discount_amount.setText("- "+Charge_discount);
 
         total_amount.setText(String.valueOf((temp+Integer.parseInt(Charge_d_charge)) - Integer.parseInt(Charge_discount) ));
+        count.setText(count.getText().toString()+"  Pay to $"+total_amount.getText().toString());
     }
 
     @Override

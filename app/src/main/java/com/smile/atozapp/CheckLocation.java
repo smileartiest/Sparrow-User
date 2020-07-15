@@ -21,7 +21,7 @@ public class CheckLocation extends FragmentActivity implements OnMapReadyCallbac
         setContentView(R.layout.check_location);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.track_order_map);
         mapFragment.getMapAsync(this);
 
     }

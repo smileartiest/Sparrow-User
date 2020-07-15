@@ -2,10 +2,12 @@ package com.smile.atozapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ public class ViewDressDetails extends AppCompatActivity {
 
     RecyclerView list;
     TextView listcount;
+    Toolbar mytoolbar;
 
     ConstraintLayout nodata;
     TextView tryagain;
@@ -33,6 +36,11 @@ public class ViewDressDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_dress_details);
+
+        mytoolbar = findViewById(R.id.dress_full_toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mytoolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
 
         listcount = findViewById(R.id.dress_full_listcount);
         list = findViewById(R.id.dress_full_list);
@@ -46,6 +54,13 @@ public class ViewDressDetails extends AppCompatActivity {
         } else {
             viewdetails(getIntent().getStringExtra("k"));
         }
+
+        mytoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
 
@@ -76,7 +91,7 @@ public class ViewDressDetails extends AppCompatActivity {
     }
 
     public void viewdetails(String categ) {
-        q = AppUtil.DRESSURL.orderByChild("catg").equalTo(categ);
+        q = AppUtil.DRESSURL.orderByChild("categ").equalTo(categ);
         getcount(q);
         FirebaseRecyclerAdapter<DressParameters, DressHold> frecycle = new FirebaseRecyclerAdapter<DressParameters, DressHold>(
                 DressParameters.class, R.layout.row_dress, DressHold.class, q
@@ -94,7 +109,7 @@ public class ViewDressDetails extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    listcount.setText("Total Products : " + dataSnapshot.getChildrenCount());
+                    listcount.setText("Total Dress collection's  " + dataSnapshot.getChildrenCount());
                 } else {
                     nodata.setVisibility(View.VISIBLE);
                     listcount.setText("Total Products : 0");
@@ -108,4 +123,9 @@ public class ViewDressDetails extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

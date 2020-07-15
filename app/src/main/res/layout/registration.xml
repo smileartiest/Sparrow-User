@@ -11,6 +11,9 @@
         android:id="@+id/reg_animation"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,8 +48,8 @@
         android:layout_marginBottom="8dp"
         android:paddingRight="16dp"
         android:paddingLeft="16dp"
-        android:paddingBottom="5dp"
-        android:paddingTop="8dp"
+        android:paddingBottom="1dp"
+        android:paddingTop="5dp"
         android:background="@drawable/border_gray_line"
         app:layout_constraintBottom_toTopOf="@+id/reg_email"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,10 +57,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:background="@color/white"
             android:fontFamily="serif"
-            android:hint="Name" />
+            android:hint="Name"
+            android:textColor="@color/colorPrimaryDark" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -67,8 +71,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="1dp"
         android:paddingRight="16dp"
         android:paddingLeft="16dp"
         android:background="@drawable/border_gray_line"
@@ -78,10 +82,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:background="@color/white"
             android:fontFamily="serif"
-            android:hint="Email ID" />
+            android:hint="Email ID"
+            android:textColor="@color/colorPrimaryDark" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -92,11 +97,10 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/buttonred"
+        android:drawableRight="@drawable/right_arrow_white"
         android:fontFamily="serif"
         android:text="COMPLETE"
-        android:paddingRight="20dp"
-        android:drawableRight="@drawable/right_arrow_white"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

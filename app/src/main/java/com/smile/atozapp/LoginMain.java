@@ -9,17 +9,21 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,6 +36,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.controller.TempData;
+import com.smile.atozapp.controller.TempOrder;
 import com.smile.atozapp.fragment.Category;
 import com.smile.atozapp.fragment.ContactUs;
 import com.smile.atozapp.fragment.Disclaimer;
@@ -40,15 +45,17 @@ import com.smile.atozapp.fragment.MyAccount;
 import com.smile.atozapp.fragment.MyOrder;
 import com.smile.atozapp.fragment.Offer;
 import com.smile.atozapp.fragment.Search;
+import com.smile.atozapp.helper.CSAlertDialog;
+import com.smile.atozapp.parameters.OrderPatameters;
 
 public class LoginMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView locantion_city,location_local;
     ConstraintLayout location_card;
 
-    ConstraintLayout order_dialog;
-    TextView dialog_title,dialog_message;
-    Button dialog_complete;
+    ConstraintLayout order_dialog,track_dialog;
+    TextView dialog_title,dialog_message,track_message;
+    Button dialog_complete,track_btn;
 
     Toolbar myaction;
     TempData t;
@@ -58,6 +65,8 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     public final String TAG = "Login Main";
+
+    CSAlertDialog dialog;
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -100,10 +109,17 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
         setSupportActionBar(myaction);
         getSupportActionBar().show();
 
+        dialog = new CSAlertDialog(this);
+        dialog.ShowDialog();
+
         order_dialog = findViewById(R.id.main_didalog);
         dialog_title = findViewById(R.id.main_d_title);
         dialog_message = findViewById(R.id.main_d_message);
         dialog_complete = findViewById(R.id.main_d_conformbtn);
+
+        track_dialog = findViewById(R.id.main_track_box);
+        track_message = findViewById(R.id.main_track_message);
+        track_btn = findViewById(R.id.main_track_btn);
 
         locantion_city = findViewById(R.id.main_city);
         location_local = findViewById(R.id.main_local);
@@ -151,20 +167,22 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue()!=null){
+                    dialog.CancelDialog();
                     dialog_title.setText("Total Cart Items "+ snapshot.getChildrenCount());
                     order_dialog.setVisibility(View.VISIBLE);
                 }else{
+                    dialog.CancelDialog();
                     order_dialog.setVisibility(View.GONE);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
         loadfragment(new Home());
+        Log.d("State ","Oncreate");
+
     }
 
     public void loadfragment(Fragment frag) {
@@ -177,7 +195,7 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onResume() {
         super.onResume();
-
+        Log.d("State ","Onresume");
         if(t.getcity()!=null){
             locantion_city.setText(t.getcity());
             location_local.setText(t.getadd());
@@ -206,7 +224,6 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
@@ -214,6 +231,50 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext() , MyCart.class));
+            }
+        });
+
+        if(new TempOrder(LoginMain.this).getoid()!=null){
+            Log.d("Order ID ",new TempOrder(LoginMain.this).getoid());
+            track_dialog.setVisibility(View.VISIBLE);
+            AppUtil.ORDERURl.child(new TempOrder(LoginMain.this).getoid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        if(snapshot.getValue()!=null){
+                            OrderPatameters o = snapshot.getValue(OrderPatameters.class);
+                            if(o.getSts().equals("new")){
+                                track_message.setText("Your Order was waiting to taken by Market.");
+                                Log.d("Track Status ","Your Order was waiting to taken by Market.");
+                            }else if (o.getSts().equals("taken")){
+                                track_message.setText("Your Order was taken by Market.....");
+                                Log.d("Track Status ","Your Order was taken by Market.");
+                            }else if (o.getSts().equals("pending")){
+                                track_message.setText("Your Order packing completed  by Market.");
+                                Log.d("Track Status ","Your Order packing completed  by Market.");
+                            }else if (o.getSts().equals("complete")){
+                                track_message.setText("Your Order was deliver Successfully ");
+                                Log.d("Track Status ","Your Order was deliver Successfully ");
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        new TempOrder(LoginMain.this).tclear();
+                                    }
+                                },1000);
+                            }
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
+
+        track_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext() , Track_Order.class).putExtra("oid",new TempOrder(LoginMain.this).getoid()));
             }
         });
 
@@ -271,28 +332,28 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             loadfragment(new MyOrder());
             getSupportActionBar().hide();
         } else if (item.getItemId() == R.id.nav_logout) {
-            final Dialog d = new Dialog(LoginMain.this);
-            d.setContentView(R.layout.calertdialog);
-            d.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-            TextView message = d.findViewById(R.id.calert_message);
-            message.setText("Are You Sure ? Want to Logout ?");
-            Button yes = d.findViewById(R.id.calert_yes);
-            Button no = d.findViewById(R.id.calert_no);
-            yes.setOnClickListener(new View.OnClickListener() {
+            CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+            builder.setIcon(R.drawable.sparrowiconsmall);
+            builder.setCornerRadius(20);
+            builder.setTitle("Hey , There !");
+            builder.setMessage("Are You sure, want to close this app ?");
+            builder.addButton("EXIT", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
                     new TempData(LoginMain.this).logout();
                     startActivity(new Intent(getApplicationContext(), Login.class));
                     finish();
                 }
             });
-            no.setOnClickListener(new View.OnClickListener() {
+            builder.addButton("NOT NOW", -1, -1, CFAlertDialog.CFAlertActionStyle.DEFAULT, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    d.dismiss();
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
                 }
             });
-            d.show();
+            builder.show();
         } else if (item.getItemId() == R.id.nav_contactus) {
             order_dialog.setVisibility(View.GONE);
             loadfragment(new ContactUs());
@@ -332,26 +393,25 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public void onBackPressed() {
-        final Dialog d = new Dialog(LoginMain.this);
-        d.setContentView(R.layout.calertdialog);
-        d.getWindow().setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        TextView message = d.findViewById(R.id.calert_message);
-        message.setText("Are You Sure ? Want to close this app ?");
-        Button yes = d.findViewById(R.id.calert_yes);
-        Button no = d.findViewById(R.id.calert_no);
-        yes.setOnClickListener(new View.OnClickListener() {
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+        builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+        builder.setIcon(R.drawable.sparrowiconsmall);
+        builder.setCornerRadius(20);
+        builder.setTitle("Hey , There !");
+        builder.setMessage("Are You sure, want to close this app ?");
+        builder.addButton("EXIT", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                d.dismiss();
-                finish();
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finishAffinity();
             }
         });
-        no.setOnClickListener(new View.OnClickListener() {
+        builder.addButton("NOT NOW", -1, -1, CFAlertDialog.CFAlertActionStyle.DEFAULT, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                d.dismiss();
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
-        d.show();
+        builder.show();
     }
 }

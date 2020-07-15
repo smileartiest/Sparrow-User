@@ -24,6 +24,7 @@ import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.controller.TempData;
 import com.smile.atozapp.models.MyOrderHold;
+import com.smile.atozapp.models.TrackHold;
 import com.smile.atozapp.parameters.OrderPatameters;
 
 public class MyOrder extends Fragment {
@@ -58,12 +59,22 @@ public class MyOrder extends Fragment {
     public void onStart() {
         super.onStart();
 
-        FirebaseRecyclerAdapter<OrderPatameters, MyOrderHold> frecycle = new FirebaseRecyclerAdapter<OrderPatameters, MyOrderHold>(
+        /*FirebaseRecyclerAdapter<OrderPatameters, MyOrderHold> frecycle = new FirebaseRecyclerAdapter<OrderPatameters, MyOrderHold>(
                 OrderPatameters.class, R.layout.row_myorder, MyOrderHold.class, q
         ) {
             @Override
             protected void populateViewHolder(MyOrderHold oh, OrderPatameters op, int i) {
                 oh.setdetails(getContext(), op.getId(), op.getUid(), op.getName(), op.getSize(), op.getQnt(), op.getAm(), op.getBam(), op.getAddres(), op.getPmode(), op.getSts());
+            }
+        };
+        mylist.setAdapter(frecycle);*/
+
+        FirebaseRecyclerAdapter<OrderPatameters , TrackHold> frecycle = new FirebaseRecyclerAdapter<OrderPatameters, TrackHold>(
+                OrderPatameters.class , R.layout.row_track_order , TrackHold.class , q
+        ) {
+            @Override
+            protected void populateViewHolder(TrackHold trackHold, OrderPatameters op, int i) {
+                trackHold.setdetails(getContext() , op.getId() , op.getName() , op.getBam() , op.getSts());
             }
         };
         mylist.setAdapter(frecycle);

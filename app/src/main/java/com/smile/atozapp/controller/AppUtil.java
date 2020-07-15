@@ -19,5 +19,6 @@ public class AppUtil {
     public static DatabaseReference DRESSPICURL = FirebaseDatabase.getInstance().getReference("dresspic");
     public static DatabaseReference STSURL = FirebaseDatabase.getInstance().getReference("storestatus");
     public static DatabaseReference CHARGES = FirebaseDatabase.getInstance().getReference("charge");
+    public static DatabaseReference NOTIFYURL = FirebaseDatabase.getInstance().getReference("notification");
 
 }

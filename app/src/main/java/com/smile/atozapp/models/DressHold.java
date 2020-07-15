@@ -11,7 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smile.atozapp.DressFullDetails;
 import com.smile.atozapp.R;
@@ -30,30 +34,32 @@ public class DressHold extends RecyclerView.ViewHolder {
         TextView name = itemView.findViewById(R.id.drow_name);
         TextView type = itemView.findViewById(R.id.drow_type);
         TextView am = itemView.findViewById(R.id.drow_amount);
-        TextView off = itemView.findViewById(R.id.drow_offer);
+        final LottieAnimationView loading_gif = itemView.findViewById(R.id.drow_loading_gif);
         final TextView stcoksts = itemView.findViewById(R.id.drow_stock);
-        final ImageView like = itemView.findViewById(R.id.drow_likebtn);
 
         String[] amlist = am1.split(",");
 
-        Glide.with(c1).load(pic1).into(pic);
+        Glide.with(c1).load(pic1).listener(new RequestListener<String, GlideDrawable>() {
+            @Override
+            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                loading_gif.setVisibility(View.VISIBLE);
+                return false;
+            }
+            @Override
+            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                loading_gif.setVisibility(View.GONE);
+                return false;
+            }
+        }).into(pic);
         name.setText(name1);
         type.setText(type1);
         am.setText("starting  $ " + amlist[0]);
-        off.setText(off1);
 
         if (stock1.equals("instock")) {
             stcoksts.setVisibility(View.GONE);
         } else {
             stcoksts.setVisibility(View.VISIBLE);
         }
-
-        like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                like.setImageResource(R.drawable.like_icon);
-            }
-        });
 
         card.setOnClickListener(new View.OnClickListener() {
             @Override

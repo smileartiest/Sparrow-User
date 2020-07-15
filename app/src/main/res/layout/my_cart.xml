@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/light_gray"
     tools:context=".MyCart">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/cart_bill_box"
@@ -76,37 +77,35 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="50dp">
 
                 <TextView
                     android:id="@+id/textView93"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
                     android:fontFamily="serif"
                     android:text="My Cart"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/cart_count"
+                    app:layout_constraintBottom_toTopOf="@+id/cart_count"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/cart_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="serif"
-                    android:gravity="center"
                     android:text="TextView"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView93"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView93" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -237,6 +236,7 @@
             android:fontFamily="serif"
             android:text="Discount (Rs)"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/block"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toStartOf="@+id/cart_sb_discount"
             app:layout_constraintStart_toStartOf="parent" />
@@ -252,6 +252,7 @@
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/red"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -265,6 +266,7 @@
             android:fontFamily="serif"
             android:text="Delivery Charge (Rs)"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/block"
             app:layout_constraintBottom_toTopOf="@+id/textView57"
             app:layout_constraintEnd_toStartOf="@+id/cart_sb_d_charge"
             app:layout_constraintStart_toStartOf="parent" />
@@ -279,6 +281,7 @@
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/green"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/cart_sb_discount"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -307,6 +310,7 @@
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/block"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/cart_sb_d_charge"
             app:layout_constraintEnd_toEndOf="parent" />
 
