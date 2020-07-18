@@ -1,15 +1,20 @@
-package com.smile.atozapp;
+package com.smile.atozapp.activitiespage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.controller.TempData;
 import com.smile.atozapp.controller.TempOrder;
@@ -28,33 +34,38 @@ import java.util.ArrayList;
 public class DressFullDetails extends AppCompatActivity {
 
     ImageView pic;
-    TextView name,type,price,offer,s,m,l,xl,xxl,need_count,need_add,need_remove,pic1,pic2,pic3;
+    TextView name,type,price,offer,need_count,need_add,need_remove,pic1,pic2,pic3;
     Button conform;
     DatabaseReference df;
     SharedPreferences sf;
     int i=1;
-    String ps,pm,pl,pxl,pxxl;
     ArrayList<String> urllist = new ArrayList<>();
+    ArrayList<String> sizelist = new ArrayList<>();
+    ArrayList<String> amlist = new ArrayList<>();
+
+    Toolbar mytoolbar;
+    Spinner spin_size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dress_full_details);
 
+        mytoolbar = findViewById(R.id.more_toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mytoolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+
         pic = findViewById(R.id.more_pic);
         name = findViewById(R.id.more_dname);
         type = findViewById(R.id.more_dtype);
         price = findViewById(R.id.more_dprice);
         offer = findViewById(R.id.more_doffer);
-        s = findViewById(R.id.more_size_s);
-        m = findViewById(R.id.more_size_m);
-        l = findViewById(R.id.more_size_l);
-        xl = findViewById(R.id.more_size_xl);
-        xxl = findViewById(R.id.more_size_xxl);
         need_count = findViewById(R.id.more_need_count);
         need_add = findViewById(R.id.more_need_add);
         need_remove = findViewById(R.id.more_need_remove);
         conform = findViewById(R.id.more_conformbtn);
+        spin_size = findViewById(R.id.more_size_spinner);
 
         pic1 = findViewById(R.id.more_pic1);
         pic2 = findViewById(R.id.more_pic2);
@@ -65,11 +76,6 @@ public class DressFullDetails extends AppCompatActivity {
         df = AppUtil.DRESSURL.child(getIntent().getStringExtra("id"));
         sf = getSharedPreferences("order",MODE_PRIVATE);
 
-        s.setVisibility(View.GONE);
-        m.setVisibility(View.GONE);
-        l.setVisibility(View.GONE);
-        xl.setVisibility(View.GONE);
-        xxl.setVisibility(View.GONE);
 
         urllist.clear();
 
@@ -84,73 +90,17 @@ public class DressFullDetails extends AppCompatActivity {
                     price.setText(d.getDam());
                     offer.setText(d.getDoff());
                     new TempOrder(DressFullDetails.this).adddpic(d.getDpic() , d.getId());
-
                     urllist.add(d.getDpic());
-
                     String tempsize = d.getSize();
                     String tempam = d.getDam();
-
                     final String[] sizesplit = tempsize.split(",");
                     final String[] amsplit = tempam.split(",");
-
-                    if(sizesplit.length>0){
-                        for(int i = 0 ; i <sizesplit.length ; i++){
-                            if(sizesplit[i].equals("s")){
-                                s.setVisibility(View.VISIBLE);
-                                ps = amsplit[i];
-                            }else if(sizesplit[i].equals("m")){
-                                m.setVisibility(View.VISIBLE);
-                                pm = amsplit[i];
-                            }else if(sizesplit[i].equals("l")){
-                                l.setVisibility(View.VISIBLE);
-                                pl = amsplit[i];
-                            }else if(sizesplit[i].equals("xl")){
-                                xl.setVisibility(View.VISIBLE);
-                                pxl = amsplit[i];
-                            }else if(sizesplit[i].equals("xxl")){
-                                xxl.setVisibility(View.VISIBLE);
-                                pxxl = amsplit[i];
-                            }
-                        }
-                    }else{
-                        if(d.getSize().equals("s")){
-                            s.setVisibility(View.VISIBLE);
-                            m.setVisibility(View.GONE);
-                            l.setVisibility(View.GONE);
-                            xl.setVisibility(View.GONE);
-                            xxl.setVisibility(View.GONE);
-                        }else if(d.getSize().equals("m")){
-                            m.setVisibility(View.VISIBLE);
-                            s.setVisibility(View.GONE);
-                            l.setVisibility(View.GONE);
-                            xl.setVisibility(View.GONE);
-                            xxl.setVisibility(View.GONE);
-                        }else if(d.getSize().equals("l")){
-                            l.setVisibility(View.VISIBLE);
-                            s.setVisibility(View.GONE);
-                            m.setVisibility(View.GONE);
-                            xl.setVisibility(View.GONE);
-                            xxl.setVisibility(View.GONE);
-                        }else if(d.getSize().equals("xl")){
-                            xl.setVisibility(View.VISIBLE);
-                            s.setVisibility(View.GONE);
-                            m.setVisibility(View.GONE);
-                            l.setVisibility(View.GONE);
-                            xxl.setVisibility(View.GONE);
-                        }else if(d.getSize().equals("xxl")){
-                            xxl.setVisibility(View.VISIBLE);
-                            s.setVisibility(View.GONE);
-                            m.setVisibility(View.GONE);
-                            l.setVisibility(View.GONE);
-                            xl.setVisibility(View.GONE);
-                        }
+                    for(int i = 0 ; i <sizesplit.length ; i++){
+                        sizelist.add(sizesplit[i]);
+                        amlist.add(amsplit[i]);
                     }
-                }
-                else {
-                    name.setText("");
-                    type.setText("");
-                    price.setText("");
-                    offer.setText("");
+                    ArrayAdapter<String> ad = new ArrayAdapter(DressFullDetails.this , R.layout.spinlist , sizesplit);
+                    spin_size.setAdapter(ad);
                 }
             }
 
@@ -219,7 +169,7 @@ public class DressFullDetails extends AppCompatActivity {
             public void onClick(View v) {
                 if(i>0){
                     String key = AppUtil.CARTURL.push().getKey();
-                    CartParameters c = new CartParameters(key,new TempOrder(DressFullDetails.this).getmid(),new TempOrder(DressFullDetails.this).getpic(),name.getText().toString(),type.getText().toString(),new TempOrder(DressFullDetails.this).getdressam(),new TempOrder(DressFullDetails.this).getdresssize(),need_count.getText().toString());
+                    CartParameters c = new CartParameters(key,new TempOrder(DressFullDetails.this).getmid(),new TempOrder(DressFullDetails.this).getpic(),name.getText().toString(),type.getText().toString(),"dress",new TempOrder(DressFullDetails.this).getdressam(),new TempOrder(DressFullDetails.this).getdresssize(),need_count.getText().toString());
                     AppUtil.CARTURL.child(new TempData(DressFullDetails.this).getuid()).child(key).setValue(c);
                     finish();
                 }
@@ -238,68 +188,16 @@ public class DressFullDetails extends AppCompatActivity {
             }
         });
 
-        s.setOnClickListener(new View.OnClickListener() {
+        spin_size.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                new TempOrder(DressFullDetails.this).adddresssizeam("S",ps);
-                price.setText(ps);
-                s.setBackgroundResource(R.drawable.text_select);
-                m.setBackgroundResource(R.drawable.borderline);
-                l.setBackgroundResource(R.drawable.borderline);
-                xl.setBackgroundResource(R.drawable.borderline);
-                xxl.setBackgroundResource(R.drawable.borderline);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                new TempOrder(DressFullDetails.this).adddresssizeam(sizelist.get(position) , amlist.get(position));
+                price.setText(amlist.get(position));
             }
-        });
 
-        m.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                new TempOrder(DressFullDetails.this).adddresssizeam("M",pm);
-                price.setText(pm);
-                s.setBackgroundResource(R.drawable.borderline);
-                m.setBackgroundResource(R.drawable.text_select);
-                l.setBackgroundResource(R.drawable.borderline);
-                xl.setBackgroundResource(R.drawable.borderline);
-                xxl.setBackgroundResource(R.drawable.borderline);
-            }
-        });
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        l.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new TempOrder(DressFullDetails.this).adddresssizeam("L",pl);
-                price.setText(pl);
-                s.setBackgroundResource(R.drawable.borderline);
-                m.setBackgroundResource(R.drawable.borderline);
-                l.setBackgroundResource(R.drawable.text_select);
-                xl.setBackgroundResource(R.drawable.borderline);
-                xxl.setBackgroundResource(R.drawable.borderline);
-            }
-        });
-
-        xl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new TempOrder(DressFullDetails.this).adddresssizeam("XL",pxl);
-                price.setText(pxl);
-                s.setBackgroundResource(R.drawable.borderline);
-                m.setBackgroundResource(R.drawable.borderline);
-                l.setBackgroundResource(R.drawable.borderline);
-                xl.setBackgroundResource(R.drawable.text_select);
-                xxl.setBackgroundResource(R.drawable.borderline);
-            }
-        });
-
-        xxl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new TempOrder(DressFullDetails.this).adddresssizeam("XXL",pxxl);
-                price.setText(pxxl);
-                s.setBackgroundResource(R.drawable.borderline);
-                m.setBackgroundResource(R.drawable.borderline);
-                l.setBackgroundResource(R.drawable.borderline);
-                xl.setBackgroundResource(R.drawable.borderline);
-                xxl.setBackgroundResource(R.drawable.text_select);
             }
         });
 
@@ -327,5 +225,18 @@ public class DressFullDetails extends AppCompatActivity {
             }
         });
 
+        mytoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

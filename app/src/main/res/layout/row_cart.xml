@@ -27,7 +27,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/block"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cart_row_icon_indication"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -84,6 +84,16 @@
                 android:drawableRight="@drawable/add_green_icon"/>
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/cart_row_icon_indication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/green_dot" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

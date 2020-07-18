@@ -10,6 +10,8 @@ public class AppUtil {
     public static DatabaseReference OFFERURL = FirebaseDatabase.getInstance().getReference("offer");
     public static DatabaseReference CARTURL =  FirebaseDatabase.getInstance().getReference("cart");
     public static DatabaseReference ORDERURl = FirebaseDatabase.getInstance().getReference("order");
+    public static DatabaseReference DELIVERYURl = FirebaseDatabase.getInstance().getReference("delivery");
+    public static DatabaseReference BILLINGURl = FirebaseDatabase.getInstance().getReference("billing");
     public static DatabaseReference ADDRESURL = FirebaseDatabase.getInstance().getReference("address");
     public static DatabaseReference MARKETURL = FirebaseDatabase.getInstance().getReference("market");
     public static DatabaseReference DRESSURL = FirebaseDatabase.getInstance().getReference("dress");
@@ -20,5 +22,7 @@ public class AppUtil {
     public static DatabaseReference STSURL = FirebaseDatabase.getInstance().getReference("storestatus");
     public static DatabaseReference CHARGES = FirebaseDatabase.getInstance().getReference("charge");
     public static DatabaseReference NOTIFYURL = FirebaseDatabase.getInstance().getReference("notification");
+    public static DatabaseReference HOMEPAGE = FirebaseDatabase.getInstance().getReference("home_page");
+    public static DatabaseReference ELECTRONICURL = FirebaseDatabase.getInstance().getReference("electronics");
 
 }

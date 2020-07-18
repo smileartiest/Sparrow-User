@@ -10,11 +10,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DatabaseReference;
 import com.smile.atozapp.R;
-import com.smile.atozapp.ViewMoreDetails;
+import com.smile.atozapp.activitiespage.ViewMoreDetails;
 import com.smile.atozapp.controller.AppUtil;
-import com.smile.atozapp.controller.TimeDate;
 
 public class MyOrderHold extends RecyclerView.ViewHolder {
 

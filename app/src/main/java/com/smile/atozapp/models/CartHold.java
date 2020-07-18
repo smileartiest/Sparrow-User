@@ -1,7 +1,9 @@
 package com.smile.atozapp.models;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,11 +23,12 @@ public class CartHold extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public void setdetails(final Context c1 , final String id1,final String mid1, String pic1, final String name1, String type1, final String am1, final String size1, final String qnt1){
+    public void setdetails(final Context c1 , final String id1,final String mid1, String pic1, final String name1, String type1, String cat1, final String am1, final String size1, final String qnt1){
 
         TextView name = itemView.findViewById(R.id.cart_row_name);
         TextView type = itemView.findViewById(R.id.cart_row_type);
         final TextView count = itemView.findViewById(R.id.cart_row_count);
+        final ImageView indication_icon = itemView.findViewById(R.id.cart_row_icon_indication);
 
         TextView add = itemView.findViewById(R.id.cart_row_add);
         TextView remove = itemView.findViewById(R.id.cart_row_remove);
@@ -34,6 +37,14 @@ public class CartHold extends RecyclerView.ViewHolder {
         type.setText(name1+" . "+size1+" . Rs "+am1);
 
         count.setText(qnt1);
+
+        Log.d("Category ",cat1);
+
+        if(cat1.equals("dress")){
+            indication_icon.setImageResource(R.drawable.yellow_dot);
+        }else if(cat1.equals("market")){
+            indication_icon.setImageResource(R.drawable.green_dot);
+        }
 
         to = new TempOrder(c1);
         td = new TempData(c1);

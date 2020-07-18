@@ -13,14 +13,15 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/buttonred"
+        android:layout_marginEnd="16dp"
         android:fontFamily="serif"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="click to Add"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimaryDark"
+        map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toEndOf="@+id/my_location_current_img"
         map:layout_constraintTop_toBottomOf="@+id/cardView3" />
 

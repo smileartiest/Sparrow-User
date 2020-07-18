@@ -1,13 +1,10 @@
-package com.smile.atozapp;
+package com.smile.atozapp.activitiespage;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,8 +22,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.helper.CSAlertDialog;
+import com.smile.atozapp.parameters.BillingParameters;
 import com.smile.atozapp.parameters.OrderPatameters;
 
 public class Track_Order extends FragmentActivity implements OnMapReadyCallback {
@@ -41,7 +40,7 @@ public class Track_Order extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.track__order);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.track_order_map);
         mapFragment.getMapAsync(this);
@@ -72,7 +71,6 @@ public class Track_Order extends FragmentActivity implements OnMapReadyCallback 
                     if(snapshot.exists()) {
                         if (snapshot.getValue() != null) {
                             OrderPatameters o = snapshot.getValue(OrderPatameters.class);
-                            top_amount.setText("To Pay Rs. "+o.getBam());
                             if(o.getSts().equals("new")){
                                 title_status.setText("Your Order was waiting to taken by Market.");
                                 message_txt.setText("Please wait.Process going on");
@@ -114,6 +112,21 @@ public class Track_Order extends FragmentActivity implements OnMapReadyCallback 
 
                 }
             });
+
+            AppUtil.BILLINGURl.child(getIntent().getStringExtra("oid")).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.getValue()!=null){
+                        BillingParameters b = snapshot.getValue(BillingParameters.class);
+                        top_amount.setText("To Pay Rs. "+b.getTotal_amount());
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
         }
     }
     void complete_dialog(){

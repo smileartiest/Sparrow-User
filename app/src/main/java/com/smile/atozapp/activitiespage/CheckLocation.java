@@ -1,4 +1,4 @@
-package com.smile.atozapp;
+package com.smile.atozapp.activitiespage;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -10,6 +10,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.smile.atozapp.R;
 
 public class CheckLocation extends FragmentActivity implements OnMapReadyCallback {
 

@@ -1,16 +1,16 @@
-package com.smile.atozapp.fragment;
+package com.smile.atozapp.activitiespage;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,40 +19,41 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.smile.atozapp.LoginMain;
 import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.controller.TempData;
-import com.smile.atozapp.models.MyOrderHold;
 import com.smile.atozapp.models.TrackHold;
 import com.smile.atozapp.parameters.OrderPatameters;
 
-public class MyOrder extends Fragment {
+public class MyOrder_Page extends AppCompatActivity {
 
     View v;
     RecyclerView mylist;
     Query q;
     ConstraintLayout nodata;
     TextView gomarket;
+    Toolbar mytoolbar;
 
-    public MyOrder() {
-    }
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.myorder_page);
 
-        v = inflater.inflate(R.layout.frag_myorder, container, false);
-        mylist = v.findViewById(R.id.myorder_list);
-        mylist.setLayoutManager(new LinearLayoutManager(getContext()));
+        mytoolbar = findViewById(R.id.myorder_toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mytoolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+
+        mylist = findViewById(R.id.myorder_list);
+        mylist.setLayoutManager(new LinearLayoutManager(this));
         mylist.setHasFixedSize(true);
-        nodata = v.findViewById(R.id.myorder_no_order);
-        gomarket = v.findViewById(R.id.no_order_gomarket);
+        nodata = findViewById(R.id.myorder_no_order);
+        gomarket = findViewById(R.id.no_order_gomarket);
 
-        q = AppUtil.ORDERURl.orderByChild("uid").equalTo(new TempData(getContext()).getuid());
+        q = AppUtil.ORDERURl.orderByChild("uid").equalTo(new TempData(this).getuid());
 
         getdata();
-        return v;
+
     }
 
     @Override
@@ -74,7 +75,7 @@ public class MyOrder extends Fragment {
         ) {
             @Override
             protected void populateViewHolder(TrackHold trackHold, OrderPatameters op, int i) {
-                trackHold.setdetails(getContext() , op.getId() , op.getName() , op.getBam() , op.getSts());
+                trackHold.setdetails(MyOrder_Page.this , op.getId() , op.getName() , op.getSts());
             }
         };
         mylist.setAdapter(frecycle);
@@ -88,7 +89,14 @@ public class MyOrder extends Fragment {
         gomarket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext() , LoginMain.class));
+                startActivity(new Intent(MyOrder_Page.this , LoginMain.class));
+            }
+        });
+
+        mytoolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -112,4 +120,9 @@ public class MyOrder extends Fragment {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

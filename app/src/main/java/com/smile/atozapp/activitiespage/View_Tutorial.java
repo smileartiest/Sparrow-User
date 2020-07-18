@@ -1,4 +1,4 @@
-package com.smile.atozapp;
+package com.smile.atozapp.activitiespage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.smile.atozapp.R;
 
 public class View_Tutorial extends AppCompatActivity {
 

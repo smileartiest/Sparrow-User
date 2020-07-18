@@ -38,7 +38,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MarketHold extends RecyclerView.ViewHolder {
 
-    ImageView pic, complete_sts;
+    ImageView pic, complete_sts,indication_icon;
     TextView name, category, price, stocksts;
     Spinner qntyty;
     LottieAnimationView loading_gif;
@@ -57,9 +57,10 @@ public class MarketHold extends RecyclerView.ViewHolder {
         loading_gif = itemView.findViewById(R.id.row_market_loading_gif);
         stocksts = itemView.findViewById(R.id.row_market_stock);
         addbtn = itemView.findViewById(R.id.row_market_addbtn);
+        indication_icon = itemView.findViewById(R.id.row_market_indication_icon);
     }
 
-    public void setdetails(final Context c1, final String id1, final String mpic, final String mname, String mtype, final String mcatg, String mqnt, String mam, final String stock1) {
+    public void setdetails(final Context c1, final String id1, final String mpic, final String mname, String mtype, final String mcatg, String cat1, String mqnt, String mam, final String stock1) {
         td = new TempData(c1);
 
         Glide.with(c1).load(mpic).listener(new RequestListener<String, GlideDrawable>() {
@@ -84,6 +85,12 @@ public class MarketHold extends RecyclerView.ViewHolder {
         qntyty.setAdapter(ad);
 
         price.setText(amlist[0]);
+
+        if(cat1.equals("veg")){
+            indication_icon.setImageResource(R.drawable.green_dot);
+        }else{
+            indication_icon.setImageResource(R.drawable.red_dot);
+        }
 
         qntyty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -111,7 +118,7 @@ public class MarketHold extends RecyclerView.ViewHolder {
                 addbtn.setVisibility(View.GONE);
                 complete_sts.setVisibility(View.VISIBLE);
                 String key = AppUtil.CARTURL.push().getKey();
-                CartParameters c = new CartParameters(key, id1, mpic, mname, mcatg, price.getText().toString(), qntyty.getSelectedItem().toString(), "1");
+                CartParameters c = new CartParameters(key, id1, mpic, mname, mcatg,"market" , price.getText().toString(), qntyty.getSelectedItem().toString(), "1");
                 AppUtil.CARTURL.child(new TempData(c1).getuid()).child(key).setValue(c);
                 new TempOrder(c1).addcartid(key);
             }

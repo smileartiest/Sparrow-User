@@ -1,4 +1,4 @@
-package com.smile.atozapp;
+package com.smile.atozapp.activitiespage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +15,9 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.models.DressHold;
 import com.smile.atozapp.parameters.DressParameters;
@@ -25,7 +25,7 @@ import com.smile.atozapp.parameters.DressParameters;
 public class ViewDressDetails extends AppCompatActivity {
 
     RecyclerView list;
-    TextView listcount;
+    TextView listcount,title_text;
     Toolbar mytoolbar;
 
     ConstraintLayout nodata;
@@ -46,13 +46,28 @@ public class ViewDressDetails extends AppCompatActivity {
         list = findViewById(R.id.dress_full_list);
         nodata = findViewById(R.id.dress_full_noitem);
         tryagain = findViewById(R.id.no_item_tryagainbtn);
+        title_text = findViewById(R.id.dress_full_title);
 
         list.setHasFixedSize(true);
 
-        if (getIntent().getStringExtra("k").equals("all")) {
-            viewall();
-        } else {
-            viewdetails(getIntent().getStringExtra("k"));
+        if(getIntent().hasExtra("tit")){
+            title_text.setText(getIntent().getStringExtra("k"));
+        }else{
+            title_text.setText(getIntent().getStringExtra("tit"));
+        }
+
+        if(getIntent().getStringExtra("f").equals("dress")) {
+            if (getIntent().getStringExtra("k").equals("all")) {
+                viewall();
+            } else {
+                viewdetails(getIntent().getStringExtra("k"));
+            }
+        }else if(getIntent().getStringExtra("f").equals("electronics")){
+            if (getIntent().getStringExtra("k").equals("all")) {
+                viewall1();
+            } else {
+                viewdetails1(getIntent().getStringExtra("k"));
+            }
         }
 
         mytoolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -84,7 +99,20 @@ public class ViewDressDetails extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(DressHold dressHold, DressParameters dp, int i) {
-                dressHold.setdetails(getApplicationContext(), dp.getId(), dp.getDname(), dp.getDtype(), dp.getDam(), dp.getDoff(), dp.getDpic() , dp.getStock());
+                dressHold.setdetails(getApplicationContext(), dp.getId(), dp.getDname(), dp.getDtype(), dp.getDam(), dp.getDoff(), dp.getDpic() , dp.getStock() ,dp.getCat());
+            }
+        };
+        list.setAdapter(frecycle);
+    }
+
+    public void viewall1(){
+        getcount(AppUtil.ELECTRONICURL);
+        FirebaseRecyclerAdapter<DressParameters, DressHold> frecycle = new FirebaseRecyclerAdapter<DressParameters, DressHold>(
+                DressParameters.class, R.layout.row_dress, DressHold.class, AppUtil.DRESSURL
+        ) {
+            @Override
+            protected void populateViewHolder(DressHold dressHold, DressParameters dp, int i) {
+                dressHold.setdetails(getApplicationContext(), dp.getId(), dp.getDname(), dp.getDtype(), dp.getDam(), dp.getDoff(), dp.getDpic() , dp.getStock() , dp.getCat());
             }
         };
         list.setAdapter(frecycle);
@@ -98,7 +126,21 @@ public class ViewDressDetails extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(DressHold dressHold, DressParameters dp, int i) {
-                dressHold.setdetails(getApplicationContext(), dp.getId(), dp.getDname(), dp.getDtype(), dp.getDam(), dp.getDoff(), dp.getDpic(),dp.getStock());
+                dressHold.setdetails(getApplicationContext(), dp.getId(), dp.getDname(), dp.getDtype(), dp.getDam(), dp.getDoff(), dp.getDpic(),dp.getStock(),dp.getCat());
+            }
+        };
+        list.setAdapter(frecycle);
+    }
+
+    public void viewdetails1(String categ) {
+        q = AppUtil.ELECTRONICURL.orderByChild("categ").equalTo(categ);
+        getcount(q);
+        FirebaseRecyclerAdapter<DressParameters, DressHold> frecycle = new FirebaseRecyclerAdapter<DressParameters, DressHold>(
+                DressParameters.class, R.layout.row_dress, DressHold.class, q
+        ) {
+            @Override
+            protected void populateViewHolder(DressHold dressHold, DressParameters dp, int i) {
+                dressHold.setdetails(getApplicationContext(), dp.getId(), dp.getDname(), dp.getDtype(), dp.getDam(), dp.getDoff(), dp.getDpic(),dp.getStock(),dp.getCat());
             }
         };
         list.setAdapter(frecycle);

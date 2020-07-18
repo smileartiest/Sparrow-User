@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:id="@+id/otp_screen"
-    tools:context=".OtpPage">
+    tools:context=".activitiespage.OtpPage">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/otp_animation"

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.smile.atozapp">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -24,7 +23,10 @@
         android:roundIcon="@mipmap/ic_applogo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".activitiespage.Terms_Conditions"
+            android:theme="@style/AppTheme1"></activity>
+        <activity android:name=".activitiespage.FAQ_page"
+            android:theme="@style/AppTheme1"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,51 +40,54 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Track_Order"
-            android:label="@string/title_activity_track__order"></activity>
+            android:name=".activitiespage.Track_Order"
+            android:label="@string/title_activity_track__order" />
         <activity
-            android:name=".CheckLocation"
+            android:name=".activitiespage.CheckLocation"
             android:label="@string/title_activity_check_location" />
         <activity
-            android:name=".View_Tutorial"
+            android:name=".activitiespage.View_Tutorial"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name=".ViewMoreDetails"
+            android:name=".activitiespage.ViewMoreDetails"
             android:label="@string/title_activity_view_more_details"
-            android:theme="@style/AppTheme1"/>
+            android:theme="@style/AppTheme1" />
         <activity
-            android:name=".MyLocation"
+            android:name=".activitiespage.MyLocation"
             android:label="@string/title_activity_my_location"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name=".ViewDressDetails"
+            android:name=".activitiespage.ViewDressDetails"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name=".MyCart"
+            android:name=".activitiespage.MyOrder_Page"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name=".ViewMarketDetails"
+            android:name=".activitiespage.MyCart"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".activitiespage.ViewMarketDetails"
             android:theme="@style/AppTheme1" />
         <activity
             android:name=".addressdetails.AddAdress"
             android:label="@string/title_activity_add_adress" />
         <activity
-            android:name=".DressFullDetails"
+            android:name=".activitiespage.DressFullDetails"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name=".LoginMain"
+            android:name=".activitiespage.LoginMain"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name=".Registration"
+            android:name=".activitiespage.Registration"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name=".OtpPage"
+            android:name=".activitiespage.OtpPage"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name=".Login"
+            android:name=".activitiespage.Login"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name=".Splase"
+            android:name=".activitiespage.Splase"
             android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

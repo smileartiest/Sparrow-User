@@ -6,30 +6,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
-import com.smile.atozapp.ViewDressDetails;
-import com.smile.atozapp.ViewMarketDetails;
+import com.smile.atozapp.activitiespage.ViewDressDetails;
+import com.smile.atozapp.activitiespage.ViewMarketDetails;
 import com.smile.atozapp.controller.AppUtil;
-import com.smile.atozapp.models.DressHold;
-import com.smile.atozapp.parameters.DressParameters;
 import com.smile.atozapp.R;
-import com.smile.atozapp.parameters.OfferParameters;
+import com.smile.atozapp.parameters.HomePagePicsParameters;
 import com.smile.atozapp.models.SliderAdapter;
 
 import java.util.ArrayList;
@@ -40,7 +38,11 @@ public class Home extends Fragment {
     SliderView sliderView;
     ArrayList<String> imglist = new ArrayList<>();
     TextView viewall_market,viewall_food,viewall_market1,viewall_dress,viewall_electronics;
-    CardView daily_fruits_card,daily_oil_card,daily_household_card,daily_pcare_card,daily_snacks_card,daily_egg_card;
+    ImageView electronic_pic1,electronic_pic2,electronic_pic3,electronic_pic4,electronic_pic5,electronic_pic6,
+              daliy_pic1,daliy_pic2,daliy_pic3,daliy_pic4,daliy_pic5,daliy_pic6,
+              food_pic1,food_pic2,food_pic3,food_pic4,
+              market_pic1,market_pic2,market_pic3,market_pic4,market_pic5,market_pic6,
+              dress_pic1,dress_pic2,dress_pic3;
 
     public Home() {
     }
@@ -58,14 +60,38 @@ public class Home extends Fragment {
         viewall_electronics = v.findViewById(R.id.home_viewall_electronics);
         viewall_dress = v.findViewById(R.id.home_viewall_dress);
 
-        daily_fruits_card = v.findViewById(R.id.home_daily_fruits_card);
-        daily_oil_card =v.findViewById(R.id.home_daily_oil_card);
-        daily_household_card =v.findViewById(R.id.home_daily_household_card);
-        daily_pcare_card =v.findViewById(R.id.home_daily_pcare_card);
-        daily_snacks_card =v.findViewById(R.id.home_daily_snacks_card);
-        daily_egg_card = v.findViewById(R.id.home_daily_egg_card);
+        electronic_pic1 = v.findViewById(R.id.home_electronic_pic1);
+        electronic_pic2 = v.findViewById(R.id.home_electronic_pic2);
+        electronic_pic3 = v.findViewById(R.id.home_electronic_pic3);
+        electronic_pic4 = v.findViewById(R.id.home_electronic_pic4);
+        electronic_pic5 = v.findViewById(R.id.home_electronic_pic5);
+        electronic_pic6 = v.findViewById(R.id.home_electronic_pic6);
+
+        daliy_pic1 = v.findViewById(R.id.home_daily_pci1);
+        daliy_pic2 = v.findViewById(R.id.home_daily_pci2);
+        daliy_pic3 = v.findViewById(R.id.home_daily_pci3);
+        daliy_pic4 = v.findViewById(R.id.home_daily_pci4);
+        daliy_pic5 = v.findViewById(R.id.home_daily_pci5);
+        daliy_pic6 = v.findViewById(R.id.home_daily_pci6);
+
+        food_pic1 = v.findViewById(R.id.home_foods_pic1);
+        food_pic2 = v.findViewById(R.id.home_foods_pic2);
+        food_pic3 = v.findViewById(R.id.home_foods_pic3);
+        food_pic4 = v.findViewById(R.id.home_foods_pic4);
+
+        market_pic1 = v.findViewById(R.id.home_market_pic1);
+        market_pic2 = v.findViewById(R.id.home_market_pic2);
+        market_pic3 = v.findViewById(R.id.home_market_pic3);
+        market_pic4 = v.findViewById(R.id.home_market_pic4);
+        market_pic5 = v.findViewById(R.id.home_market_pic5);
+        market_pic6 = v.findViewById(R.id.home_market_pic6);
+
+        dress_pic1 = v.findViewById(R.id.home_dress_pic1);
+        dress_pic2 = v.findViewById(R.id.home_dress_pic2);
+        dress_pic3 = v.findViewById(R.id.home_dress_pic3);
 
         getimages();
+        getPicters();
         return v;
     }
 
@@ -103,52 +129,185 @@ public class Home extends Fragment {
         viewall_electronics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("tit","All Electronic's Details").putExtra("k","all"));
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","electronics").putExtra("tit","All Electronic's Details").putExtra("k","all"));
             }
         });
 
         viewall_dress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("tit","All Dress Details").putExtra("k","all"));
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("tit","All Dress Details").putExtra("k","all"));
             }
         });
 
-        daily_fruits_card.setOnClickListener(new View.OnClickListener() {
+        daliy_pic1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Fruits & Vegetables"));
             }
         });
 
-        daily_oil_card.setOnClickListener(new View.OnClickListener() {
+        daliy_pic2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Foodgrains , Oil & Masala"));
             }
         });
-        daily_household_card.setOnClickListener(new View.OnClickListener() {
+        daliy_pic3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Cleaning & Household"));
             }
         });
-        daily_pcare_card.setOnClickListener(new View.OnClickListener() {
+        daliy_pic4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Baby Care & Personal Care"));
             }
         });
-        daily_snacks_card.setOnClickListener(new View.OnClickListener() {
+        daliy_pic5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Snaks & Branded Foods"));
             }
         });
-        daily_egg_card.setOnClickListener(new View.OnClickListener() {
+        daliy_pic6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Bakery , Cakes & Dairy"));
+            }
+        });
+
+        electronic_pic1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","electronics").putExtra("tit","Mobile Back Case").putExtra("k","Mobile Back Case"));
+            }
+        });
+
+        electronic_pic2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","electronics").putExtra("tit","Mobiles").putExtra("k","Mobiles"));
+            }
+        });
+
+        electronic_pic3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","electronics").putExtra("tit","Charger").putExtra("k","Charger"));
+            }
+        });
+
+        electronic_pic4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","electronics").putExtra("tit","Headset").putExtra("k","Headset"));
+            }
+        });
+
+        electronic_pic5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","electronics").putExtra("tit","Speakers").putExtra("k","Speakers"));
+            }
+        });
+
+        electronic_pic6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","electronics").putExtra("tit","Mens & Womens watch").putExtra("k","Mens & Womens watch"));
+            }
+        });
+
+        food_pic1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Beverages"));
+            }
+        });
+
+        food_pic2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Snaks & Branded Foods"));
+            }
+        });
+
+        food_pic3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Eggs , Meat & Fish"));
+            }
+        });
+
+        food_pic4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Bakery , Cakes & Dairy"));
+            }
+        });
+
+        market_pic1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Beauty & Hygiene"));
+            }
+        });
+
+        market_pic2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Cleaning & Household"));
+            }
+        });
+
+        market_pic3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Beverages"));
+            }
+        });
+
+        market_pic4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Bakery , Cakes & Dairy"));
+            }
+        });
+
+        market_pic5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Baby Care & Personal Care"));
+            }
+        });
+
+        market_pic6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewMarketDetails.class).putExtra("k","Baby Care & Personal Care"));
+            }
+        });
+
+        dress_pic1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("k","Mens"));
+            }
+        });
+
+        dress_pic2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("k","Womens"));
+            }
+        });
+
+        dress_pic3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("k","Kids"));
             }
         });
 
@@ -171,6 +330,325 @@ public class Home extends Fragment {
 
             }
         });
+    }
+
+    void getPicters(){
+
+        AppUtil.HOMEPAGE.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null){
+                    HomePagePicsParameters h = snapshot.getValue(HomePagePicsParameters.class);
+
+                    Glide.with(getContext()).load(h.getM_case()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(electronic_pic1);
+
+                    Glide.with(getContext()).load(h.getMobile()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(electronic_pic2);
+
+                    Glide.with(getContext()).load(h.getCharger1()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(electronic_pic3);
+
+                    Glide.with(getContext()).load(h.getHeadphone()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(electronic_pic4);
+
+                    Glide.with(getContext()).load(h.getBlutooth_speaker()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(electronic_pic5);
+
+                    Glide.with(getContext()).load(h.getWatch1()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(electronic_pic6);
+
+                    Glide.with(getContext()).load(h.getFruits()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(daliy_pic1);
+
+                    Glide.with(getContext()).load(h.getFoodgrains()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(daliy_pic2);
+
+                    Glide.with(getContext()).load(h.getCleaning()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(daliy_pic3);
+
+                    Glide.with(getContext()).load(h.getPersonal_care()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(daliy_pic4);
+
+                    Glide.with(getContext()).load(h.getSnacks()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(daliy_pic5);
+
+                    Glide.with(getContext()).load(h.getBakery1()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(daliy_pic6);
+
+                    Glide.with(getContext()).load(h.getBeverage1()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(food_pic1);
+
+                    Glide.with(getContext()).load(h.getSnacks2()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(food_pic2);
+
+                    Glide.with(getContext()).load(h.getEggs2()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(food_pic3);
+
+                    Glide.with(getContext()).load(h.getBakery1()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(food_pic4);
+
+                    Glide.with(getContext()).load(h.getBeauty1()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(market_pic1);
+
+                    Glide.with(getContext()).load(h.getCleaning()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(market_pic2);
+
+                    Glide.with(getContext()).load(h.getBeverage1()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(market_pic3);
+
+                    Glide.with(getContext()).load(h.getBakery1()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(market_pic4);
+
+                    Glide.with(getContext()).load(h.getBaby_care1()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(market_pic5);
+
+                    Glide.with(getContext()).load(h.getLadies_care()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(market_pic6);
+
+                    Glide.with(getContext()).load(h.getMens_dress()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(dress_pic1);
+
+                    Glide.with(getContext()).load(h.getWomens_dress()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(dress_pic2);
+
+                    Glide.with(getContext()).load(h.getKids_dress()).listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(dress_pic3);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     public void viewimage()

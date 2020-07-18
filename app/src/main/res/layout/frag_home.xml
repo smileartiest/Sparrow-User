@@ -17,8 +17,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginTop="16dp"
+            android:background="@color/white"
             android:visibility="visible">
 
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
                 android:visibility="visible"
-                app:cardCornerRadius="15dp"
+                app:cardCornerRadius="10dp"
                 app:cardElevation="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +99,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/home_daily_fruits_card"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -114,18 +114,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView28"
+                        android:id="@+id/home_daily_pci1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView45"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/fruits1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView45"
@@ -133,8 +131,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Fruits and Vegetables"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -143,7 +143,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+                        app:layout_constraintTop_toBottomOf="@+id/home_daily_pci1" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -165,18 +165,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView29"
+                        android:id="@+id/home_daily_pci2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView46"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/foodgrains1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView46"
@@ -184,8 +182,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Foodgrains , Oil and Masala"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -215,18 +215,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView30"
+                        android:id="@+id/home_daily_pci3"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView47"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/cleaninghouse1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView47"
@@ -234,8 +232,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Cleaning and HouseHold"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -250,7 +250,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/home_daily_pcare_card"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -265,18 +265,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView31"
+                        android:id="@+id/home_daily_pci4"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView44"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/personalcare1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView44"
@@ -284,8 +282,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Personal Care's"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -315,18 +315,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView32"
+                        android:id="@+id/home_daily_pci5"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView43"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/snacks1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView43"
@@ -334,8 +332,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Snaks and Beverage"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -344,7 +344,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView32" />
+                        app:layout_constraintTop_toBottomOf="@+id/home_daily_pci5" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -366,18 +366,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView46"
+                        android:id="@+id/home_daily_pci6"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView42"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/eggs1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView42"
@@ -385,8 +383,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Bread , Dairy and Eggs"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -394,8 +394,7 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView46" />
+                        app:layout_constraintStart_toStartOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -448,7 +447,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView36"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -456,7 +455,44 @@
                 app:cardElevation="1dp"
                 app:layout_constraintEnd_toStartOf="@+id/cardView37"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView48" />
+                app:layout_constraintTop_toBottomOf="@+id/textView48">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/home_electronic_pic1"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toTopOf="@+id/textView95"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/arrow_right_theam" />
+
+                    <TextView
+                        android:id="@+id/textView95"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="serif"
+                        android:lines="1"
+                        android:text="Mobile back Case"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/block"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView37"
@@ -469,7 +505,44 @@
                 app:layout_constraintBottom_toBottomOf="@+id/cardView36"
                 app:layout_constraintEnd_toStartOf="@+id/cardView38"
                 app:layout_constraintStart_toEndOf="@+id/cardView36"
-                app:layout_constraintTop_toTopOf="@+id/cardView36" />
+                app:layout_constraintTop_toTopOf="@+id/cardView36">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/home_electronic_pic2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toTopOf="@+id/textView98"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/arrow_right_theam" />
+
+                    <TextView
+                        android:id="@+id/textView98"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="serif"
+                        android:lines="1"
+                        android:text="Mobile Phones"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/block"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView38"
@@ -482,12 +555,49 @@
                 app:layout_constraintBottom_toBottomOf="@+id/cardView37"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cardView37"
-                app:layout_constraintTop_toTopOf="@+id/cardView37" />
+                app:layout_constraintTop_toTopOf="@+id/cardView37">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/home_electronic_pic3"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toTopOf="@+id/textView100"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/arrow_right_theam" />
+
+                    <TextView
+                        android:id="@+id/textView100"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="serif"
+                        android:lines="1"
+                        android:text="Charger"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/block"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView40"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -495,7 +605,44 @@
                 app:cardElevation="1dp"
                 app:layout_constraintEnd_toStartOf="@+id/cardView39"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView36" />
+                app:layout_constraintTop_toBottomOf="@+id/cardView36">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/home_electronic_pic4"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toTopOf="@+id/textView102"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/arrow_right_theam" />
+
+                    <TextView
+                        android:id="@+id/textView102"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="serif"
+                        android:lines="1"
+                        android:text="headset"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/block"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView39"
@@ -508,7 +655,44 @@
                 app:layout_constraintBottom_toBottomOf="@+id/cardView40"
                 app:layout_constraintEnd_toStartOf="@+id/cardView41"
                 app:layout_constraintStart_toEndOf="@+id/cardView40"
-                app:layout_constraintTop_toTopOf="@+id/cardView40" />
+                app:layout_constraintTop_toTopOf="@+id/cardView40">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/home_electronic_pic5"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toTopOf="@+id/textView104"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/arrow_right_theam" />
+
+                    <TextView
+                        android:id="@+id/textView104"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="serif"
+                        android:lines="1"
+                        android:text="bluetooth speaker"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/block"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView41"
@@ -521,7 +705,44 @@
                 app:layout_constraintBottom_toBottomOf="@+id/cardView39"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cardView39"
-                app:layout_constraintTop_toTopOf="@+id/cardView39" />
+                app:layout_constraintTop_toTopOf="@+id/cardView39">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/home_electronic_pic6"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toTopOf="@+id/textView105"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/arrow_right_theam" />
+
+                    <TextView
+                        android:id="@+id/textView105"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="serif"
+                        android:lines="1"
+                        android:text="Mens and Ladies watch"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/block"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/home_viewall_electronics"
@@ -572,7 +793,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView13"
                 android:layout_width="0dp"
-                android:layout_height="180dp"
+                android:layout_height="220dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -587,18 +808,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView17"
+                        android:id="@+id/home_foods_pic1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView35"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/beverage1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView35"
@@ -606,8 +825,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Beverage"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -637,18 +858,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView15"
+                        android:id="@+id/home_foods_pic2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView36"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/snacks1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView36"
@@ -656,9 +875,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
                         android:gravity="center"
+                        android:lines="1"
                         android:text="Snaks and Branded Foods"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -675,7 +896,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView14"
                 android:layout_width="0dp"
-                android:layout_height="180dp"
+                android:layout_height="220dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -690,18 +911,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView22"
+                        android:id="@+id/home_foods_pic3"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView40"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/eggs1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView40"
@@ -709,8 +928,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Eggs , Meat and Fish"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -740,18 +961,17 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView13"
+                        android:id="@+id/home_foods_pic4"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView34"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/bakeryicon1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView34"
@@ -759,9 +979,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
                         android:gravity="center"
+                        android:lines="1"
                         android:text="Bakery , Cakes and Dairy"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="#000"
@@ -820,7 +1042,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView24"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -835,18 +1057,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView9"
+                        android:id="@+id/home_market_pic1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView7"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/beauty1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView7"
@@ -854,12 +1074,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Beauty and Hygiene"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/block"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -884,18 +1107,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView11"
+                        android:id="@+id/home_market_pic2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView13"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/cleaninghouse1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView13"
@@ -903,12 +1124,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Cleaning and HouseHold"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/block"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -933,18 +1157,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView19"
+                        android:id="@+id/home_market_pic3"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView18"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/beverage1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView18"
@@ -952,12 +1174,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Beverage"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/block"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -967,7 +1192,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView45"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -982,18 +1207,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView20"
+                        android:id="@+id/home_market_pic4"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView28"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/bakeryicon1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView28"
@@ -1001,8 +1224,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Bakery , Cakes and Dairy"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -1032,18 +1257,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView24"
+                        android:id="@+id/home_market_pic5"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView33"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/babycare1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView33"
@@ -1051,8 +1274,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Baby Care"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -1082,18 +1307,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView34"
+                        android:id="@+id/home_market_pic6"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView37"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/personalcare1svg" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView37"
@@ -1101,8 +1324,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
+                        android:lines="1"
                         android:text="Ladis Care's"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -1162,7 +1387,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView16"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="180dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
@@ -1177,18 +1402,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView38"
+                        android:id="@+id/home_dress_pic1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView59"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_mensshirts" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView59"
@@ -1196,9 +1419,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
                         android:gravity="center"
+                        android:lines="1"
                         android:text="Men's"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/block"
@@ -1228,18 +1453,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView39"
+                        android:id="@+id/home_dress_pic2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView61"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_womens1" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView61"
@@ -1247,9 +1470,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
                         android:gravity="center"
+                        android:lines="1"
                         android:text="Women's"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/block"
@@ -1278,18 +1503,16 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView40"
+                        android:id="@+id/home_dress_pic3"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toTopOf="@+id/textView64"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_childrens1" />
+                        app:srcCompat="@drawable/right_arrow_theme" />
 
                     <TextView
                         android:id="@+id/textView64"
@@ -1297,9 +1520,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
                         android:fontFamily="serif"
                         android:gravity="center"
+                        android:lines="1"
                         android:text="Kid's"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/block"

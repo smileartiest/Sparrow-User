@@ -91,7 +91,7 @@ public class Search extends Fragment {
         ) {
             @Override
             protected void populateViewHolder(MarketHold mh, MarketParameters mp, int i) {
-                mh.setdetails(getContext() , mp.getId(),mp.getMpic(),mp.getMname(),mp.getMtype(),mp.getMcatg(),mp.getMqnt(),mp.getMam() , mp.getStock());
+                mh.setdetails(getContext() , mp.getId(),mp.getMpic(),mp.getMname(),mp.getMtype(),mp.getMcatg(),"veg" ,mp.getMqnt(),mp.getMam() , mp.getStock());
             }
         };
         list.setAdapter(frecycle);

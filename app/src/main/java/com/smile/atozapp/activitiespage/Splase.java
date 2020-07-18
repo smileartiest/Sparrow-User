@@ -1,4 +1,4 @@
-package com.smile.atozapp;
+package com.smile.atozapp.activitiespage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -10,9 +10,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
+import com.smile.atozapp.R;
 import com.smile.atozapp.controller.TempData;
 
 public class Splase extends AppCompatActivity {

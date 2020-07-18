@@ -24,7 +24,7 @@ import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.parameters.ContactusParameters;
 
-import static com.smile.atozapp.LoginMain.MY_PERMISSIONS_REQUEST_LOCATION;
+import static com.smile.atozapp.activitiespage.LoginMain.MY_PERMISSIONS_REQUEST_LOCATION;
 
 public class ContactUs extends Fragment {
 

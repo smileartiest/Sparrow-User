@@ -1,4 +1,4 @@
-package com.smile.atozapp;
+package com.smile.atozapp.activitiespage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,11 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,19 +27,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.smile.atozapp.BuildConfig;
+import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.controller.TempData;
-import com.smile.atozapp.controller.TempOrder;
 import com.smile.atozapp.fragment.Category;
 import com.smile.atozapp.fragment.ContactUs;
 import com.smile.atozapp.fragment.Disclaimer;
 import com.smile.atozapp.fragment.Home;
 import com.smile.atozapp.fragment.MyAccount;
-import com.smile.atozapp.fragment.MyOrder;
+import com.smile.atozapp.fragment.Notification;
 import com.smile.atozapp.fragment.Offer;
 import com.smile.atozapp.fragment.Search;
 import com.smile.atozapp.helper.CSAlertDialog;
@@ -79,19 +78,25 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
                     return true;
                 case R.id.bot_nav_notification:
                     order_dialog.setVisibility(View.GONE);
+                    track_dialog.setVisibility(View.GONE);
+                    loadfragment(new Notification());
+                    getSupportActionBar().hide();
                     return true;
                 case R.id.bot_nav_category:
                     order_dialog.setVisibility(View.GONE);
+                    track_dialog.setVisibility(View.GONE);
                     loadfragment(new Category());
                     getSupportActionBar().hide();
                     return true;
                 case R.id.bot_nav_search:
                     order_dialog.setVisibility(View.GONE);
+                    track_dialog.setVisibility(View.GONE);
                     loadfragment(new Search());
                     getSupportActionBar().hide();
                     return true;
                 case R.id.bot_nav_offer:
                     order_dialog.setVisibility(View.GONE);
+                    track_dialog.setVisibility(View.GONE);
                     loadfragment(new Offer());
                     getSupportActionBar().hide();
                     return true;
@@ -181,8 +186,6 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             }
         });
         loadfragment(new Home());
-        Log.d("State ","Oncreate");
-
     }
 
     public void loadfragment(Fragment frag) {
@@ -195,7 +198,7 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("State ","Onresume");
+
         if(t.getcity()!=null){
             locantion_city.setText(t.getcity());
             location_local.setText(t.getadd());
@@ -234,49 +237,56 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        if(new TempOrder(LoginMain.this).getoid()!=null){
-            Log.d("Order ID ",new TempOrder(LoginMain.this).getoid());
-            track_dialog.setVisibility(View.VISIBLE);
-            AppUtil.ORDERURl.child(new TempOrder(LoginMain.this).getoid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
-                        if(snapshot.getValue()!=null){
-                            OrderPatameters o = snapshot.getValue(OrderPatameters.class);
-                            if(o.getSts().equals("new")){
+        Query checkOrders = AppUtil.ORDERURl.orderByChild("uid").equalTo(new TempData(LoginMain.this).getuid());
+        checkOrders.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null){
+                    String sTitle = null;
+                    String sMessage = null;
+                    String sStatus = null;
+                    for(DataSnapshot data : snapshot.getChildren()){
+                        OrderPatameters o = data.getValue(OrderPatameters.class);
+                        if(o.getSts().equals("complete")){ }else {
+                            if (o.getSts().equals("new")) {
+                                sTitle = o.getId();
+                                sStatus = "yes";
                                 track_message.setText("Your Order was waiting to taken by Market.");
-                                Log.d("Track Status ","Your Order was waiting to taken by Market.");
-                            }else if (o.getSts().equals("taken")){
-                                track_message.setText("Your Order was taken by Market.....");
-                                Log.d("Track Status ","Your Order was taken by Market.");
-                            }else if (o.getSts().equals("pending")){
+                                Log.d("id" ,o.getId());
+                            } else if (o.getSts().equals("taken")) {
+                                sTitle = o.getId();
+                                sStatus = "yes";
+                                track_message.setText("Your Order was taken by Market.");
+                                Log.d("id" ,o.getId());
+                            } else if (o.getSts().equals("pending")) {
+                                sTitle = o.getId();
+                                sStatus = "yes";
                                 track_message.setText("Your Order packing completed  by Market.");
-                                Log.d("Track Status ","Your Order packing completed  by Market.");
-                            }else if (o.getSts().equals("complete")){
-                                track_message.setText("Your Order was deliver Successfully ");
-                                Log.d("Track Status ","Your Order was deliver Successfully ");
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        new TempOrder(LoginMain.this).tclear();
-                                    }
-                                },1000);
+                                Log.d("id" ,o.getId());
                             }
                         }
                     }
+                    if(sTitle!=null) {
+                        Log.d("id", sTitle);
+                    }
+                    if(sStatus !=null){
+                        track_dialog.setVisibility(View.VISIBLE);
+                        final String finalSTitle = sTitle;
+                        track_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(getApplicationContext() , Track_Order.class).putExtra("oid", finalSTitle));
+                            }
+                        });
+                    }else{
+                        order_dialog.setVisibility(View.GONE);
+                    }
                 }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
-        }
-
-        track_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext() , Track_Order.class).putExtra("oid",new TempOrder(LoginMain.this).getoid()));
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
+
 
     }
 
@@ -295,6 +305,7 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
                 break;
             case R.id.login_menu_myprofile:
                 order_dialog.setVisibility(View.GONE);
+                track_dialog.setVisibility(View.GONE);
                 loadfragment(new MyAccount());
                 getSupportActionBar().hide();
                 break;
@@ -311,26 +322,28 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             getSupportActionBar().show();
         } else if (item.getItemId() == R.id.nav_category) {
             order_dialog.setVisibility(View.GONE);
+            track_dialog.setVisibility(View.GONE);
             loadfragment(new Category());
             getSupportActionBar().hide();
         } else if (item.getItemId() == R.id.nav_offer) {
             order_dialog.setVisibility(View.GONE);
+            track_dialog.setVisibility(View.GONE);
             loadfragment(new Offer());
             getSupportActionBar().hide();
         } else if(item.getItemId() == R.id.nav_myprofile){
             order_dialog.setVisibility(View.GONE);
+            track_dialog.setVisibility(View.GONE);
             loadfragment(new MyAccount());
             getSupportActionBar().hide();
         } else if(item.getItemId() == R.id.nav_cart){
             startActivity(new Intent(getApplicationContext(), MyCart.class));
         }else if(item.getItemId() == R.id.nav_disclaimer){
             order_dialog.setVisibility(View.GONE);
+            track_dialog.setVisibility(View.GONE);
             loadfragment(new Disclaimer());
             getSupportActionBar().hide();
         } else if (item.getItemId() == R.id.nav_myorder) {
-            order_dialog.setVisibility(View.GONE);
-            loadfragment(new MyOrder());
-            getSupportActionBar().hide();
+            startActivity(new Intent(LoginMain.this , MyOrder_Page.class));
         } else if (item.getItemId() == R.id.nav_logout) {
             CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
             builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
@@ -356,6 +369,7 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             builder.show();
         } else if (item.getItemId() == R.id.nav_contactus) {
             order_dialog.setVisibility(View.GONE);
+            track_dialog.setVisibility(View.GONE);
             loadfragment(new ContactUs());
             getSupportActionBar().hide();
         } else if (item.getItemId() == R.id.nav_share) {

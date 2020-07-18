@@ -17,7 +17,7 @@
     </style>
 
     <style name="DrawerIcon_whitw" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="color">@color/white</item>
+        <item name="color">@color/colorPrimaryDark</item>
     </style>
 
 

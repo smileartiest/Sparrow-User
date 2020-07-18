@@ -2,85 +2,24 @@ package com.smile.atozapp.parameters;
 
 public class OrderPatameters {
 
-    String id,uid,name,size,qnt,am,bam,addres,pmode,sts,pdate,ddate,odate,otime,did;
+    String id,uid,did,name,size,qnt,am,addres,pmode,sts,odate,otime;
 
     public OrderPatameters() {
     }
 
-    public OrderPatameters(String id, String uid, String name, String size, String qnt, String am, String bam, String addres, String pmode) {
+    public OrderPatameters(String id, String uid,String did, String name, String size, String qnt, String am, String addres, String pmode, String sts, String odate, String otime) {
         this.id = id;
         this.uid = uid;
+        this.did = did;
         this.name = name;
         this.size = size;
         this.qnt = qnt;
         this.am = am;
-        this.bam = bam;
         this.addres = addres;
         this.pmode = pmode;
-    }
-
-    public String getDid() {
-        return did;
-    }
-
-    public void setDid(String did) {
-        this.did = did;
-    }
-
-    public String getPdate() {
-        return pdate;
-    }
-
-    public void setPdate(String pdate) {
-        this.pdate = pdate;
-    }
-
-    public String getDdate() {
-        return ddate;
-    }
-
-    public void setDdate(String ddate) {
-        this.ddate = ddate;
-    }
-
-    public String getOdate() {
-        return odate;
-    }
-
-    public void setOdate(String odate) {
-        this.odate = odate;
-    }
-
-    public String getOtime() {
-        return otime;
-    }
-
-    public void setOtime(String otime) {
-        this.otime = otime;
-    }
-
-    public String getSts() {
-        return sts;
-    }
-
-    public void setSts(String sts) {
         this.sts = sts;
-    }
-
-    public String getPmode() {
-        return pmode;
-    }
-
-    public void setPmode(String pmode) {
-        this.pmode = pmode;
-    }
-
-    public String getAddres() {
-        return addres;
-    }
-
-    public void setAddres(String addres) {
-        this.addres = addres;
+        this.odate = odate;
+        this.otime = otime;
     }
 
     public String getId() {
@@ -97,6 +36,14 @@ public class OrderPatameters {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getDid() {
+        return did;
+    }
+
+    public void setDid(String did) {
+        this.did = did;
     }
 
     public String getName() {
@@ -131,11 +78,43 @@ public class OrderPatameters {
         this.am = am;
     }
 
-    public String getBam() {
-        return bam;
+    public String getAddres() {
+        return addres;
     }
 
-    public void setBam(String bam) {
-        this.bam = bam;
+    public void setAddres(String addres) {
+        this.addres = addres;
+    }
+
+    public String getPmode() {
+        return pmode;
+    }
+
+    public void setPmode(String pmode) {
+        this.pmode = pmode;
+    }
+
+    public String getSts() {
+        return sts;
+    }
+
+    public void setSts(String sts) {
+        this.sts = sts;
+    }
+
+    public String getOdate() {
+        return odate;
+    }
+
+    public void setOdate(String odate) {
+        this.odate = odate;
+    }
+
+    public String getOtime() {
+        return otime;
+    }
+
+    public void setOtime(String otime) {
+        this.otime = otime;
     }
 }

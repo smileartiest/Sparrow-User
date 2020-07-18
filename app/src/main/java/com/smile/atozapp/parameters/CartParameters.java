@@ -1,17 +1,18 @@
 package com.smile.atozapp.parameters;
 
 public class CartParameters {
-    String id,mid,pic,name,type,am,size,qnt;
+    String id,mid,pic,name,type,cat,am,size,qnt;
 
     public CartParameters() {
     }
 
-    public CartParameters(String id, String mid, String pic, String name, String type, String am, String size, String qnt) {
+    public CartParameters(String id, String mid, String pic, String name, String type,String cat, String am, String size, String qnt) {
         this.id = id;
         this.mid = mid;
         this.pic = pic;
         this.name = name;
         this.type = type;
+        this.cat = cat;
         this.am = am;
         this.size = size;
         this.qnt = qnt;
@@ -55,6 +56,14 @@ public class CartParameters {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getCat() {
+        return cat;
+    }
+
+    public void setCat(String cat) {
+        this.cat = cat;
     }
 
     public String getAm() {

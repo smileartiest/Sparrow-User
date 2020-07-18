@@ -52,7 +52,7 @@ public class TempData {
     }
 
     public String getaid(){
-        return sharedPreferences.getString("add",null);
+        return sharedPreferences.getString("id",null);
     }
 
     public void addtoken(String tid){

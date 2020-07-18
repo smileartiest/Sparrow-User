@@ -1,4 +1,4 @@
-package com.smile.atozapp;
+package com.smile.atozapp.activitiespage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,23 +18,25 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.controller.TempData;
 import com.smile.atozapp.controller.TempOrder;
 import com.smile.atozapp.controller.TimeDate;
 import com.smile.atozapp.helper.CSAlertDialog;
 import com.smile.atozapp.models.CartHold;
+import com.smile.atozapp.parameters.BillingParameters;
 import com.smile.atozapp.parameters.CartParameters;
 import com.smile.atozapp.parameters.ChargeParameters;
+import com.smile.atozapp.parameters.OrderPatameters;
 
 public class MyCart extends AppCompatActivity {
 
@@ -44,10 +46,10 @@ public class MyCart extends AppCompatActivity {
     ConstraintLayout nodata, bill_box, address_box;
     TextView gomarket;
 
-    TextView sb_total,d_charge,discount_amount,total_amount , location_city,location_local;
+    TextView sb_total, d_charge, discount_amount, total_amount, location_city, location_local;
     Button choose_address_btn;
 
-    String Charge_d_charge = null,Charge_discount = null;
+    String Charge_d_charge = null, Charge_discount = null;
 
     StringBuilder idlist;
     StringBuilder namelist;
@@ -58,7 +60,7 @@ public class MyCart extends AppCompatActivity {
     String[] qnttemp;
     String[] amtemp;
 
-    String qnt1,am1;
+    String qnt1, am1;
 
     Toolbar mytoolbar;
 
@@ -70,6 +72,7 @@ public class MyCart extends AppCompatActivity {
     TempOrder to;
 
     CSAlertDialog dialog;
+    Long order_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +119,7 @@ public class MyCart extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
         getcount();
-
     }
 
     @Override
@@ -130,7 +131,7 @@ public class MyCart extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(CartHold ch, CartParameters cp, int i) {
-                ch.setdetails(getApplicationContext(), cp.getId(), cp.getMid(), cp.getPic(), cp.getName(), cp.getType(), cp.getAm(), cp.getSize(), cp.getQnt());
+                ch.setdetails(getApplicationContext(), cp.getId(), cp.getMid(), cp.getPic(), cp.getName(), cp.getType(), cp.getCat() , cp.getAm(), cp.getSize(), cp.getQnt());
             }
         };
         cartlist.setAdapter(frecycle);
@@ -142,7 +143,7 @@ public class MyCart extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) {
-                    count.setText("item count  " + dataSnapshot.getChildrenCount()+".");
+                    count.setText("item count  " + dataSnapshot.getChildrenCount() + ".");
                     order.setVisibility(View.VISIBLE);
                     remove.setVisibility(View.VISIBLE);
                     address_box.setVisibility(View.VISIBLE);
@@ -200,20 +201,20 @@ public class MyCart extends AppCompatActivity {
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(td.getaid()!=null) {
+                if (td.getaid() != null) {
                     completedialog();
-                }else{
+                } else {
                     dialog.CancelDialog();
-                    Snackbar.make(v , "Choose address first" , Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Choose address first", Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
 
-        if(td.getaid()!=null){
+        if (td.getaid() != null) {
             location_city.setText(td.getcity());
             location_local.setText(td.getadd());
             choose_address_btn.setText("CHANGE");
-        }else{
+        } else {
             location_city.setText("Please choose address");
             location_local.setVisibility(View.INVISIBLE);
             choose_address_btn.setText("CHOOSE");
@@ -225,6 +226,27 @@ public class MyCart extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MyLocation.class));
             }
         });
+
+        Query aurogenerateid = AppUtil.ORDERURl.limitToLast(1);
+        aurogenerateid.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    for(DataSnapshot data : snapshot.getChildren()){
+                        OrderPatameters oData = data.getValue(OrderPatameters.class);
+                        Log.d("My Cart Order ID ", String.valueOf(Long.parseLong(oData.getId())+1));
+                        order_ID = Long.parseLong(String.valueOf(Long.parseLong(oData.getId())+1));
+                    }
+                } else {
+                    order_ID = Long.parseLong("1");
+                    Log.d("My Cart Order ID ", String.valueOf(order_ID));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
     }
 
     void completedialog() {
@@ -233,7 +255,7 @@ public class MyCart extends AppCompatActivity {
         builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
         builder.setContentImageDrawable(R.drawable.happy_emoji_icon);
         builder.setTextGravity(Gravity.CENTER);
-        builder.setTitle("Please confirm your Order. Your Pay for this order Rs. "+total_amount.getText().toString());
+        builder.setTitle("Please confirm your Order. Your Pay for this order Rs. " + total_amount.getText().toString());
         builder.addButton("YES", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -250,40 +272,30 @@ public class MyCart extends AppCompatActivity {
         builder.show();
     }
 
-    void setOrder(){
+    void setOrder() {
         dialog.ShowDialog();
         TimeDate timedate = new TimeDate(MyCart.this);
-        DatabaseReference df = AppUtil.ORDERURl;
-        final String key = df.push().getKey();
-        df.child(key).child("id").setValue(key);
-        df.child(key).child("uid").setValue(t.getuid());
-        df.child(key).child("name").setValue(namelist.toString());
-        df.child(key).child("size").setValue(sizelist.toString());
-        df.child(key).child("qnt").setValue(qntylist.toString());
-        df.child(key).child("am").setValue(amlist.toString());
-        df.child(key).child("addres").setValue(td.getaid());
-        df.child(key).child("pmode").setValue("cashon");
-        df.child(key).child("sts").setValue("new");
-        df.child(key).child("odate").setValue(timedate.getdate());
-        df.child(key).child("otime").setValue(timedate.gettime());
-        df.child(key).child("bam").setValue(total_amount.getText().toString());
+        OrderPatameters o = new OrderPatameters(String.valueOf(order_ID), t.getuid(),"none", namelist.toString(), sizelist.toString(), qntylist.toString(), amlist.toString(), td.getaid(), "cashon", "new", timedate.getdate(), timedate.gettime());
+        AppUtil.ORDERURl.child(String.valueOf(order_ID)).setValue(o);
+        BillingParameters b = new BillingParameters(String.valueOf(order_ID),String.valueOf(order_ID),namelist.toString(),sizelist.toString(), qntylist.toString(), amlist.toString() ,sb_total.getText().toString(),Charge_d_charge,Charge_discount,total_amount.getText().toString(),"new", timedate.gettime(),timedate.getdate());
+        AppUtil.BILLINGURl.child(String.valueOf(order_ID)).setValue(b);
         AppUtil.CARTURL.child(td.getuid()).removeValue();
         to.tclear();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                to.addoid(key);
                 dialog.CancelDialog();
-                startActivity(new Intent(getApplicationContext() , LoginMain.class));finishAffinity();
+                startActivity(new Intent(getApplicationContext(), LoginMain.class));
+                finishAffinity();
             }
-        },2000);
+        }, 2000);
     }
 
     public void getList() {
         AppUtil.CARTURL.child(t.getuid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     idlist = new StringBuilder();
                     namelist = new StringBuilder();
                     amlist = new StringBuilder();
@@ -305,7 +317,6 @@ public class MyCart extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 pd.dismiss();
@@ -314,17 +325,16 @@ public class MyCart extends AppCompatActivity {
         GetCahrges_Details();
     }
 
-    void GetCahrges_Details(){
-
+    void GetCahrges_Details() {
         AppUtil.CHARGES.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue()!= null ){
+                if (snapshot.getValue() != null) {
                     ChargeParameters c = snapshot.getValue(ChargeParameters.class);
                     Charge_discount = c.getDiscount();
                     Charge_d_charge = c.getDcharge();
                     Calculate_amount();
-                }else{
+                } else {
                     Charge_d_charge = "0";
                     Charge_discount = "0";
                     Calculate_amount();
@@ -336,7 +346,7 @@ public class MyCart extends AppCompatActivity {
         });
     }
 
-    void Calculate_amount(){
+    void Calculate_amount() {
         qnt1 = qntylist.toString();
         am1 = amlist.toString();
 
@@ -345,18 +355,18 @@ public class MyCart extends AppCompatActivity {
 
         int temp = 0;
 
-        for(int i = 0 ; i < amtemp.length ; i++){
-            temp = temp + (Integer.parseInt(qnttemp[i])*Integer.parseInt(amtemp[i]));
+        for (int i = 0; i < amtemp.length; i++) {
+            temp = temp + (Integer.parseInt(qnttemp[i]) * Integer.parseInt(amtemp[i]));
         }
 
         sb_total.setText(String.valueOf(temp));
 
-        d_charge.setText("+ "+Charge_d_charge);
+        d_charge.setText("+ " + Charge_d_charge);
 
-        discount_amount.setText("- "+Charge_discount);
+        discount_amount.setText("- " + Charge_discount);
 
-        total_amount.setText(String.valueOf((temp+Integer.parseInt(Charge_d_charge)) - Integer.parseInt(Charge_discount) ));
-        count.setText(count.getText().toString()+"  Pay to $"+total_amount.getText().toString());
+        total_amount.setText(String.valueOf((temp + Integer.parseInt(Charge_d_charge)) - Integer.parseInt(Charge_discount)));
+        count.setText(count.getText().toString() + "  Pay to $" + total_amount.getText().toString());
     }
 
     @Override

@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.smile.atozapp.R;
-import com.smile.atozapp.Track_Order;
-import com.smile.atozapp.ViewMoreDetails;
+import com.smile.atozapp.activitiespage.Track_Order;
+import com.smile.atozapp.activitiespage.ViewMoreDetails;
 
 public class TrackHold extends RecyclerView.ViewHolder {
 
@@ -27,9 +27,9 @@ public class TrackHold extends RecyclerView.ViewHolder {
         track_btn = itemView.findViewById(R.id.r_track_btn);
     }
 
-    public void setdetails(Context context1, final String oid1 , String name1 , String amount1 , String sts1){
+    public void setdetails(Context context1, final String oid1 , String name1 , String sts1){
         this.mcContect = context1;
-        title.setText("You pay this Order Rs. "+amount1);
+        title.setText("You pay this Order Rs. ");
         message.setText(name1);
 
         if (sts1.equals("cancel")) {

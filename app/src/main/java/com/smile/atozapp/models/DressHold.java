@@ -16,8 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.smile.atozapp.DressFullDetails;
+import com.smile.atozapp.activitiespage.DressFullDetails;
 import com.smile.atozapp.R;
 
 public class DressHold extends RecyclerView.ViewHolder {
@@ -26,7 +25,7 @@ public class DressHold extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public void setdetails(final Context c1, final String id1, final String name1, final String type1, final String am1, final String off1, final String pic1, final String stock1) {
+    public void setdetails(final Context c1, final String id1, final String name1, final String type1, final String am1, final String off1, final String pic1, final String stock1 , String cat1) {
 
         final ConstraintLayout card = itemView.findViewById(R.id.drow_card);
 
@@ -35,6 +34,7 @@ public class DressHold extends RecyclerView.ViewHolder {
         TextView type = itemView.findViewById(R.id.drow_type);
         TextView am = itemView.findViewById(R.id.drow_amount);
         final LottieAnimationView loading_gif = itemView.findViewById(R.id.drow_loading_gif);
+        ImageView indication_icon = itemView.findViewById(R.id.drow_icon_idication);
         final TextView stcoksts = itemView.findViewById(R.id.drow_stock);
 
         String[] amlist = am1.split(",");
@@ -59,6 +59,14 @@ public class DressHold extends RecyclerView.ViewHolder {
             stcoksts.setVisibility(View.GONE);
         } else {
             stcoksts.setVisibility(View.VISIBLE);
+        }
+
+        if(cat1!=null) {
+            if (cat1.equals("dress")) {
+                indication_icon.setImageResource(R.drawable.green_dot);
+            } else if (cat1.equals("electronics")) {
+                indication_icon.setImageResource(R.drawable.blue_dot);
+            }
         }
 
         card.setOnClickListener(new View.OnClickListener() {
