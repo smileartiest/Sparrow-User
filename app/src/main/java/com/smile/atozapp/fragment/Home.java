@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+import com.smile.atozapp.activitiespage.Search;
 import com.smile.atozapp.activitiespage.ViewDressDetails;
 import com.smile.atozapp.activitiespage.ViewMarketDetails;
 import com.smile.atozapp.controller.AppUtil;
@@ -43,6 +45,7 @@ public class Home extends Fragment {
               food_pic1,food_pic2,food_pic3,food_pic4,
               market_pic1,market_pic2,market_pic3,market_pic4,market_pic5,market_pic6,
               dress_pic1,dress_pic2,dress_pic3;
+    TextView search_btn;
 
     public Home() {
     }
@@ -90,6 +93,8 @@ public class Home extends Fragment {
         dress_pic2 = v.findViewById(R.id.home_dress_pic2);
         dress_pic3 = v.findViewById(R.id.home_dress_pic3);
 
+        search_btn = v.findViewById(R.id.home_search);
+
         getimages();
         getPicters();
         return v;
@@ -104,6 +109,13 @@ public class Home extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , Search.class));
+            }
+        });
 
         viewall_market.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,14 +141,14 @@ public class Home extends Fragment {
         viewall_electronics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","electronics").putExtra("tit","All Electronic's Details").putExtra("k","all"));
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","electronics").putExtra("tit","Electronic's Details").putExtra("k","all"));
             }
         });
 
         viewall_dress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("tit","All Dress Details").putExtra("k","all"));
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("tit","Dress Details").putExtra("k","all"));
             }
         });
 
@@ -293,21 +305,21 @@ public class Home extends Fragment {
         dress_pic1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("k","Mens"));
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("tit","Mens").putExtra("k","Mens"));
             }
         });
 
         dress_pic2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("k","Womens"));
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("tit","Womens").putExtra("k","Womens"));
             }
         });
 
         dress_pic3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("k","Kids"));
+                startActivity(new Intent(getContext() , ViewDressDetails.class).putExtra("f","dress").putExtra("tit","Kids").putExtra("k","Kids"));
             }
         });
 

@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,9 +45,14 @@ import com.smile.atozapp.fragment.Home;
 import com.smile.atozapp.fragment.MyAccount;
 import com.smile.atozapp.fragment.Notification;
 import com.smile.atozapp.fragment.Offer;
-import com.smile.atozapp.fragment.Search;
 import com.smile.atozapp.helper.CSAlertDialog;
 import com.smile.atozapp.parameters.OrderPatameters;
+import com.smile.atozapp.parameters.UpdateParameters;
+import com.smile.atozapp.retrofit.ApiUtil;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -89,10 +96,7 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
                     getSupportActionBar().hide();
                     return true;
                 case R.id.bot_nav_search:
-                    order_dialog.setVisibility(View.GONE);
-                    track_dialog.setVisibility(View.GONE);
-                    loadfragment(new Search());
-                    getSupportActionBar().hide();
+                    startActivity(new Intent(getApplicationContext() , Search.class));
                     return true;
                 case R.id.bot_nav_offer:
                     order_dialog.setVisibility(View.GONE);
@@ -134,7 +138,7 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, myaction, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -153,6 +157,8 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
                         }
                         String token = task.getResult().getToken();
                         t.addtoken(token);
+                        AppUtil.REGURL.child(new TempData(LoginMain.this).getuid()).child("fcm").setValue(token);
+                        addtoken(token);
                         Log.d(TAG, token);
                     }
                 });
@@ -279,7 +285,7 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
                             }
                         });
                     }else{
-                        order_dialog.setVisibility(View.GONE);
+                        track_dialog.setVisibility(View.GONE);
                     }
                 }
             }
@@ -287,7 +293,85 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             public void onCancelled(@NonNull DatabaseError error) { }
         });
 
+        AppUtil.UPDATEURL.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null){
+                    UpdateParameters u = snapshot.getValue(UpdateParameters.class);
+                    if(Integer.parseInt(u.getVersion_code()) > BuildConfig.VERSION_CODE){
+                        if(new TempData(LoginMain.this).getnotnow()==null) {
+                            CFAlertDialog.Builder builder = new CFAlertDialog.Builder(LoginMain.this);
+                            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+                            builder.setIcon(R.drawable.sparrowiconsmall);
+                            builder.setCornerRadius(20);
+                            builder.setTitle("Update Available !");
+                            builder.setMessage("Your current version " + BuildConfig.VERSION_NAME + " . New version " + u.getVersion_name() + " available in Google Play Store. Please update your app get new features.");
+                            builder.addButton("update", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+                                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                                    // To count with Play market backstack, After pressing back button,
+                                    // to taken back to our application, we need to add following flags to intent.
+                                    goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                            Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                                    try {
+                                        startActivity(goToMarket);
+                                    } catch (ActivityNotFoundException e) {
+                                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                                Uri.parse("http://play.google.com/store/apps/details?id=" +BuildConfig.APPLICATION_ID)));
+                                    }
+                                }
+                            });
+                            builder.addButton("NOT NOW", -1, -1, CFAlertDialog.CFAlertActionStyle.DEFAULT, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    new TempData(LoginMain.this).addNotnow("not now");
+                                }
+                            });
+                            builder.show();
+                        }
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    void addtoken(String token) {
+        Call<String> call = ApiUtil.getServiceClass().updateid(new TempData(LoginMain.this).getuid() , token);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    if(response.body().equals("1")){
+                        Toast.makeText(LoginMain.this, "Update successfull", Toast.LENGTH_SHORT).show();
+                    }else if(response.body().equals("10")){
+                        Toast.makeText(LoginMain.this, "Update error", Toast.LENGTH_SHORT).show();
+                    }else if(response.body().equals("2")){
+                        Toast.makeText(LoginMain.this, "insert successfull", Toast.LENGTH_SHORT).show();
+                    }else if(response.body().equals("20")){
+                        Toast.makeText(LoginMain.this, "insert error", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(LoginMain.this, response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(LoginMain.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("Update Token ",t.getMessage());
+            }
+        });
     }
 
     @Override
@@ -417,6 +501,7 @@ public class LoginMain extends AppCompatActivity implements NavigationView.OnNav
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                new TempData(LoginMain.this).clearnotnoe();
                 finishAffinity();
             }
         });

@@ -45,17 +45,70 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:664672871022:android:6235027cac173bda11bc7f",
+        "mobilesdk_app_id": "1:664672871022:android:6558870398a7771b11bc7f",
         "android_client_info": {
           "package_name": "com.smile.atozapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "664672871022-vtussdsd4mlg37bm5vtni70vea7213mo.apps.googleusercontent.com",
+          "client_id": "664672871022-m7b9svf2a8rq2f1aiccgjdc5gik0bv9v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.smile.atozapp",
+            "certificate_hash": "e6c0053476c4df73d9e43ac25cef3dd3c3148105"
+          }
+        },
+        {
+          "client_id": "664672871022-nqlg7ij6qk4dgg9fcm19vp2s0fjasjuc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smile.atozapp",
+            "certificate_hash": "4bf9dd2fc2276e8038e53ece771bc32c72f8ad33"
+          }
+        },
+        {
+          "client_id": "664672871022-38rk11nr0v12ohiuaqhmh16r147upvug.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smile.atozapp",
+            "certificate_hash": "4385c76289657dd4a66cc9f8a65eb6d7883b6165"
+          }
+        },
+        {
+          "client_id": "664672871022-mduv4hastoukd0n5r2s0bvdl1o5ps684.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCK594lEn2kiD2peFgm124CO82DvKEY_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664672871022-mduv4hastoukd0n5r2s0bvdl1o5ps684.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664672871022:android:f0c748fb6cacf53811bc7f",
+        "android_client_info": {
+          "package_name": "com.smile.atozdelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664672871022-r4jk9la77fivrlq43qagcubcd3qdabps.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smile.atozdelivery",
             "certificate_hash": "4385c76289657dd4a66cc9f8a65eb6d7883b6165"
           }
         },

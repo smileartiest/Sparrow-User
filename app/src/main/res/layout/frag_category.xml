@@ -14,7 +14,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
@@ -673,7 +675,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/addres_loc1" />
+                        app:srcCompat="@drawable/phone_svg_icon" />
 
                     <TextView
                         android:id="@+id/electronic_mobile"
@@ -721,7 +723,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/addres_loc1" />
+                        app:srcCompat="@drawable/headset_svg_icon" />
 
                     <TextView
                         android:id="@+id/electronic_headset"
@@ -769,7 +771,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/addres_loc1" />
+                        app:srcCompat="@drawable/speaker_svg_icon" />
 
                     <TextView
                         android:id="@+id/electronic_speaker"
@@ -817,7 +819,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/addres_loc1" />
+                        app:srcCompat="@drawable/charger_svg_icon" />
 
                     <TextView
                         android:id="@+id/electronic_charger"
@@ -865,7 +867,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/addres_loc1" />
+                        app:srcCompat="@drawable/mobile_case_svg_icon" />
 
                     <TextView
                         android:id="@+id/electronic_mobileback_case"
@@ -913,7 +915,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/addres_loc1" />
+                        app:srcCompat="@drawable/watch_svg_icon" />
 
                     <TextView
                         android:id="@+id/electronic_watch"

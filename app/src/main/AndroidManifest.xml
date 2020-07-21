@@ -23,8 +23,6 @@
         android:roundIcon="@mipmap/ic_applogo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitiespage.Terms_Conditions"
-            android:theme="@style/AppTheme1"></activity>
         <activity android:name=".activitiespage.FAQ_page"
             android:theme="@style/AppTheme1"/>
         <!--
@@ -59,6 +57,9 @@
         <activity
             android:name=".activitiespage.ViewDressDetails"
             android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".activitiespage.Search"
+            android:theme="@style/AppTheme1"/>
         <activity
             android:name=".activitiespage.MyOrder_Page"
             android:theme="@style/AppTheme1" />

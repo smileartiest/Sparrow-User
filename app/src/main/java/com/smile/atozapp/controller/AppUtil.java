@@ -24,5 +24,6 @@ public class AppUtil {
     public static DatabaseReference NOTIFYURL = FirebaseDatabase.getInstance().getReference("notification");
     public static DatabaseReference HOMEPAGE = FirebaseDatabase.getInstance().getReference("home_page");
     public static DatabaseReference ELECTRONICURL = FirebaseDatabase.getInstance().getReference("electronics");
+    public static DatabaseReference UPDATEURL = FirebaseDatabase.getInstance().getReference("updateapp");
 
 }

@@ -16,8 +16,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.smile.atozapp.activitiespage.DressFullDetails;
 import com.smile.atozapp.R;
+import com.smile.atozapp.controller.AppUtil;
+import com.smile.atozapp.controller.TempData;
+import com.smile.atozapp.parameters.CartParameters;
 
 public class DressHold extends RecyclerView.ViewHolder {
 
@@ -25,7 +32,7 @@ public class DressHold extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public void setdetails(final Context c1, final String id1, final String name1, final String type1, final String am1, final String off1, final String pic1, final String stock1 , String cat1) {
+    public void setdetails(final Context c1, final String id1, final String name1, final String type1, final String am1, final String off1, final String pic1, final String stock1 , final String cat1) {
 
         final ConstraintLayout card = itemView.findViewById(R.id.drow_card);
 
@@ -42,7 +49,17 @@ public class DressHold extends RecyclerView.ViewHolder {
         Glide.with(c1).load(pic1).listener(new RequestListener<String, GlideDrawable>() {
             @Override
             public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                loading_gif.setVisibility(View.VISIBLE);
+                if(cat1.equals("dress")){
+                    loading_gif.setVisibility(View.VISIBLE);
+                    loading_gif.setAnimation(R.raw.dress_loading);
+                    loading_gif.playAnimation();
+                    loading_gif.loop(true);
+                }else {
+                    loading_gif.setVisibility(View.VISIBLE);
+                    loading_gif.setAnimation(R.raw.image_loading_gif);
+                    loading_gif.playAnimation();
+                    loading_gif.loop(true);
+                }
                 return false;
             }
             @Override
@@ -63,7 +80,7 @@ public class DressHold extends RecyclerView.ViewHolder {
 
         if(cat1!=null) {
             if (cat1.equals("dress")) {
-                indication_icon.setImageResource(R.drawable.green_dot);
+                indication_icon.setImageResource(R.drawable.yellow_dot);
             } else if (cat1.equals("electronics")) {
                 indication_icon.setImageResource(R.drawable.blue_dot);
             }
@@ -73,7 +90,11 @@ public class DressHold extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 if (stock1.equals("instock")) {
-                    c1.startActivity(new Intent(c1, DressFullDetails.class).putExtra("id", id1).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    if(cat1.equals("dress")) {
+                        c1.startActivity(new Intent(c1, DressFullDetails.class).putExtra("f","dress").putExtra("id", id1).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    }else if (cat1.equals("electronics")) {
+                        c1.startActivity(new Intent(c1, DressFullDetails.class).putExtra("f","electronics").putExtra("id", id1).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    }
                 }else{
                     Toast.makeText(c1, "Out Of Stock", Toast.LENGTH_SHORT).show();
                 }

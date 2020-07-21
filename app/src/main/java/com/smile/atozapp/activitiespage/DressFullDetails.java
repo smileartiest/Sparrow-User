@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class DressFullDetails extends AppCompatActivity {
 
     ImageView pic;
-    TextView name,type,price,offer,need_count,need_add,need_remove,pic1,pic2,pic3;
+    TextView name,type,type_title,price,prize_title,offer,offer_title,size_title,need_count,need_add,need_remove,pic1,pic2,pic3;
     Button conform;
     DatabaseReference df;
     SharedPreferences sf;
@@ -71,9 +71,22 @@ public class DressFullDetails extends AppCompatActivity {
         pic2 = findViewById(R.id.more_pic2);
         pic3 = findViewById(R.id.more_pic3);
 
+        type_title = findViewById(R.id.more_dtype_title);
+        prize_title = findViewById(R.id.more_dprice_title);
+        offer_title = findViewById(R.id.more_doffer_title);
+        size_title = findViewById(R.id.more_size_title);
+
         need_count.setText(String.valueOf(i));
 
-        df = AppUtil.DRESSURL.child(getIntent().getStringExtra("id"));
+        if (getIntent().getStringExtra("f").equals("dress")) {
+            df = AppUtil.DRESSURL.child(getIntent().getStringExtra("id"));
+        } else if (getIntent().getStringExtra("f").equals("electronics")) {
+            df = AppUtil.ELECTRONICURL.child(getIntent().getStringExtra("id"));
+            type_title.setText("Mobile Type");
+            prize_title.setText("Mobile Price");
+            offer_title.setText("Mobile Offer");
+            size_title.setText("Choose Your Custom Colour");
+        }
         sf = getSharedPreferences("order",MODE_PRIVATE);
 
 
@@ -169,7 +182,7 @@ public class DressFullDetails extends AppCompatActivity {
             public void onClick(View v) {
                 if(i>0){
                     String key = AppUtil.CARTURL.push().getKey();
-                    CartParameters c = new CartParameters(key,new TempOrder(DressFullDetails.this).getmid(),new TempOrder(DressFullDetails.this).getpic(),name.getText().toString(),type.getText().toString(),"dress",new TempOrder(DressFullDetails.this).getdressam(),new TempOrder(DressFullDetails.this).getdresssize(),need_count.getText().toString());
+                    CartParameters c = new CartParameters(key,new TempOrder(DressFullDetails.this).getmid(),new TempOrder(DressFullDetails.this).getpic(),name.getText().toString(),type.getText().toString(),getIntent().getStringExtra("f"),new TempOrder(DressFullDetails.this).getdressam(),new TempOrder(DressFullDetails.this).getdresssize(),need_count.getText().toString());
                     AppUtil.CARTURL.child(new TempData(DressFullDetails.this).getuid()).child(key).setValue(c);
                     finish();
                 }

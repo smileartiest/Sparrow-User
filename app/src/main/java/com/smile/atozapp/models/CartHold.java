@@ -42,8 +42,14 @@ public class CartHold extends RecyclerView.ViewHolder {
 
         if(cat1.equals("dress")){
             indication_icon.setImageResource(R.drawable.yellow_dot);
-        }else if(cat1.equals("market")){
+        }else if(cat1.equals("veg")){
             indication_icon.setImageResource(R.drawable.green_dot);
+        }else if(cat1.equals("non_veg")){
+            indication_icon.setImageResource(R.drawable.red_dot);
+        }else if(cat1.equals("electronics")){
+            indication_icon.setImageResource(R.drawable.blue_dot);
+        }else if(cat1.equals("market")){
+            indication_icon.setImageResource(R.drawable.market_dot);
         }
 
         to = new TempOrder(c1);

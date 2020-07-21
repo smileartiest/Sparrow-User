@@ -2,25 +2,24 @@ package com.smile.atozapp.parameters;
 
 public class BillingParameters {
 
-    String id,oid,name,size,quantity,amount,sub_total,delivery_charge,discount,total_amount,sts,bdate,btime;
+    String id,oid,uid,did,date,time,amount,sub_total,delivery_charge,discount,total_amount,sts;
 
     public BillingParameters() {
     }
 
-    public BillingParameters(String id, String oid, String name, String size, String quantity, String amount, String sub_total, String delivery_charge, String discount, String total_amount, String sts, String bdate, String btime) {
+    public BillingParameters(String id, String oid, String uid,String did, String date,String time, String amount, String sub_total, String delivery_charge, String discount, String total_amount , String sts) {
         this.id = id;
         this.oid = oid;
-        this.name = name;
-        this.size = size;
-        this.quantity = quantity;
+        this.uid = uid;
+        this.did = did;
+        this.date = date;
+        this.time = time;
         this.amount = amount;
         this.sub_total = sub_total;
         this.delivery_charge = delivery_charge;
         this.discount = discount;
         this.total_amount = total_amount;
         this.sts = sts;
-        this.bdate = bdate;
-        this.btime = btime;
     }
 
     public String getId() {
@@ -39,32 +38,40 @@ public class BillingParameters {
         this.oid = oid;
     }
 
-    public String getName() {
-        return name;
+    public String getUid() {
+        return uid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public String getSize() {
-        return size;
+    public String getDid() {
+        return did;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setDid(String did) {
+        this.did = did;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getAmount() {
         return amount;
-    }
-
-    public String getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
     }
 
     public void setAmount(String amount) {
@@ -109,21 +116,5 @@ public class BillingParameters {
 
     public void setSts(String sts) {
         this.sts = sts;
-    }
-
-    public String getBdate() {
-        return bdate;
-    }
-
-    public void setBdate(String bdate) {
-        this.bdate = bdate;
-    }
-
-    public String getBtime() {
-        return btime;
-    }
-
-    public void setBtime(String btime) {
-        this.btime = btime;
     }
 }

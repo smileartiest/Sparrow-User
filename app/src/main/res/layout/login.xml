@@ -35,7 +35,7 @@
         android:paddingTop="5dp"
         android:paddingRight="10dp"
         android:paddingBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/login_loginbtn"
+        app:layout_constraintBottom_toTopOf="@+id/login_terms_condition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView47">
 
@@ -94,5 +94,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/login_mobno"
         app:srcCompat="@drawable/ic_indian_flag_icon" />
+
+    <CheckBox
+        android:id="@+id/login_terms_condition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="serif"
+        android:text="Accept"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toTopOf="@+id/login_loginbtn"
+        app:layout_constraintEnd_toStartOf="@+id/login_terms_condition_click"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/login_terms_condition_click"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="serif"
+        android:gravity="center_vertical"
+        android:text=" Terms &amp; Conditions"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/login_terms_condition"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/login_terms_condition"
+        app:layout_constraintTop_toTopOf="@+id/login_terms_condition" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

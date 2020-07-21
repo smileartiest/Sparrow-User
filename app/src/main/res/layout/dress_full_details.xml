@@ -137,7 +137,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView111"
+                android:id="@+id/more_dtype_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -150,32 +150,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
             <TextView
-                android:id="@+id/textView112"
+                android:id="@+id/more_dprice_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="serif"
-                android:text="Price"
+                android:text="Dress Price"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/block"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView111" />
+                app:layout_constraintTop_toBottomOf="@+id/more_dtype_title" />
 
             <TextView
-                android:id="@+id/textView113"
+                android:id="@+id/more_doffer_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="serif"
-                android:text="Offer"
+                android:text="Dress Offer"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/block"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView112" />
+                app:layout_constraintTop_toBottomOf="@+id/more_dprice_title" />
 
             <TextView
                 android:id="@+id/more_dtype"
@@ -191,7 +191,7 @@
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView111"
+                app:layout_constraintStart_toEndOf="@+id/more_dtype_title"
                 app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
             <TextView
@@ -208,8 +208,8 @@
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView112"
-                app:layout_constraintTop_toBottomOf="@+id/textView111" />
+                app:layout_constraintStart_toEndOf="@+id/more_dprice_title"
+                app:layout_constraintTop_toBottomOf="@+id/more_dtype_title" />
 
             <TextView
                 android:id="@+id/more_doffer"
@@ -227,7 +227,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView113"
+                app:layout_constraintStart_toEndOf="@+id/more_doffer_title"
                 app:layout_constraintTop_toBottomOf="@+id/more_dprice" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -239,7 +239,7 @@
 
 
             <TextView
-                android:id="@+id/textView117"
+                android:id="@+id/more_size_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -265,7 +265,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView117" />
+                app:layout_constraintTop_toBottomOf="@+id/more_size_title" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

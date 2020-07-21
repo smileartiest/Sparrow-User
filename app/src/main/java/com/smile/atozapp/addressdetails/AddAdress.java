@@ -13,6 +13,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build.VERSION;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.smile.atozapp.R;
 import com.smile.atozapp.controller.AppUtil;
@@ -132,28 +135,84 @@ public class AddAdress extends FragmentActivity implements GoogleMap.OnMyLocatio
     protected void onResume() {
         super.onResume();
 
+        completebtn.setText("enter House / Flat no");
+
+        flatno.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                completebtn.setText("enter area ");
+            }
+        });
+
+        area.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                completebtn.setText("enter contact Number");
+            }
+        });
+
+        cno.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                completebtn.setText("complete");
+            }
+        });
+
         completebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fno1 = flatno.getEditText().getText().toString();
-                String area1 = area.getEditText().getText().toString();
-                String cno1 = cno.getEditText().getText().toString();
 
-                if (fno1.length() != 0) {
-                    if (area1.length() != 0) {
-                        if (cno1.length() != 0) {
-                            String key = AppUtil.ADDRESURL.push().getKey();
-                            AddressParameters ad = new AddressParameters(key, t.getuid(), String.valueOf(currentloc.getLatitude()), String.valueOf(currentloc.getLongitude()), cityname.getText().toString(), fno1 + "," + area1, cno1);
-                            AppUtil.ADDRESURL.child(t.getuid()).child(key).setValue(ad);
-                            finish();
+                if (completebtn.getText().toString().equals("complete")) {
+                    String fno1 = flatno.getEditText().getText().toString();
+                    String area1 = area.getEditText().getText().toString();
+                    String cno1 = cno.getEditText().getText().toString();
+
+                    if (fno1.length() != 0) {
+                        if (area1.length() != 0) {
+                            if (cno1.length() != 0) {
+                                String key = AppUtil.ADDRESURL.push().getKey();
+                                AddressParameters ad = new AddressParameters(key, t.getuid(), String.valueOf(currentloc.getLatitude()), String.valueOf(currentloc.getLongitude()), cityname.getText().toString(), fno1 + "," + area1, cno1);
+                                AppUtil.ADDRESURL.child(t.getuid()).child(key).setValue(ad);
+                                finish();
+                            } else {
+                                cno.getEditText().setError("enter valid detail");
+                            }
                         } else {
-                            cno.getEditText().setError("enter valid detail");
+                            area.getEditText().setError("enter valid detail");
                         }
                     } else {
-                        area.getEditText().setError("enter valid detail");
+                        flatno.getEditText().setError("enter valid details");
                     }
                 } else {
-                    flatno.getEditText().setError("enter valid details");
+                    Snackbar.make(v , "complete your details" , Snackbar.LENGTH_SHORT).show();
                 }
             }
         });

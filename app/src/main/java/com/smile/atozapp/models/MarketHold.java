@@ -60,7 +60,7 @@ public class MarketHold extends RecyclerView.ViewHolder {
         indication_icon = itemView.findViewById(R.id.row_market_indication_icon);
     }
 
-    public void setdetails(final Context c1, final String id1, final String mpic, final String mname, String mtype, final String mcatg, String cat1, String mqnt, String mam, final String stock1) {
+    public void setdetails(final Context c1, final String id1, final String mpic, final String mname, String mtype, final String mcatg, final String cat1, String mqnt, String mam, final String stock1) {
         td = new TempData(c1);
 
         Glide.with(c1).load(mpic).listener(new RequestListener<String, GlideDrawable>() {
@@ -88,8 +88,10 @@ public class MarketHold extends RecyclerView.ViewHolder {
 
         if(cat1.equals("veg")){
             indication_icon.setImageResource(R.drawable.green_dot);
-        }else{
+        }else if(cat1.equals("non_veg")){
             indication_icon.setImageResource(R.drawable.red_dot);
+        }else if(cat1.equals("market")){
+            indication_icon.setImageResource(R.drawable.market_dot);
         }
 
         qntyty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -118,7 +120,7 @@ public class MarketHold extends RecyclerView.ViewHolder {
                 addbtn.setVisibility(View.GONE);
                 complete_sts.setVisibility(View.VISIBLE);
                 String key = AppUtil.CARTURL.push().getKey();
-                CartParameters c = new CartParameters(key, id1, mpic, mname, mcatg,"market" , price.getText().toString(), qntyty.getSelectedItem().toString(), "1");
+                CartParameters c = new CartParameters(key, id1, mpic, mname, mcatg, cat1 , price.getText().toString(), qntyty.getSelectedItem().toString(), "1");
                 AppUtil.CARTURL.child(new TempData(c1).getuid()).child(key).setValue(c);
                 new TempOrder(c1).addcartid(key);
             }

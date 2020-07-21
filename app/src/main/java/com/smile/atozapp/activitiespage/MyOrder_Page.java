@@ -60,16 +60,6 @@ public class MyOrder_Page extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        /*FirebaseRecyclerAdapter<OrderPatameters, MyOrderHold> frecycle = new FirebaseRecyclerAdapter<OrderPatameters, MyOrderHold>(
-                OrderPatameters.class, R.layout.row_myorder, MyOrderHold.class, q
-        ) {
-            @Override
-            protected void populateViewHolder(MyOrderHold oh, OrderPatameters op, int i) {
-                oh.setdetails(getContext(), op.getId(), op.getUid(), op.getName(), op.getSize(), op.getQnt(), op.getAm(), op.getBam(), op.getAddres(), op.getPmode(), op.getSts());
-            }
-        };
-        mylist.setAdapter(frecycle);*/
-
         FirebaseRecyclerAdapter<OrderPatameters , TrackHold> frecycle = new FirebaseRecyclerAdapter<OrderPatameters, TrackHold>(
                 OrderPatameters.class , R.layout.row_track_order , TrackHold.class , q
         ) {
@@ -109,6 +99,7 @@ public class MyOrder_Page extends AppCompatActivity {
                 if (dataSnapshot.getValue() != null) {
                     nodata.setVisibility(View.GONE);
                 } else {
+                    mylist.setVisibility(View.GONE);
                     nodata.setVisibility(View.VISIBLE);
                 }
             }

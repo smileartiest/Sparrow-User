@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,11 +51,7 @@ public class ViewDressDetails extends AppCompatActivity {
 
         list.setHasFixedSize(true);
 
-        if(getIntent().hasExtra("tit")){
-            title_text.setText(getIntent().getStringExtra("k"));
-        }else{
-            title_text.setText(getIntent().getStringExtra("tit"));
-        }
+        title_text.setText(getIntent().getStringExtra("tit"));
 
         if(getIntent().getStringExtra("f").equals("dress")) {
             if (getIntent().getStringExtra("k").equals("all")) {
@@ -108,7 +105,7 @@ public class ViewDressDetails extends AppCompatActivity {
     public void viewall1(){
         getcount(AppUtil.ELECTRONICURL);
         FirebaseRecyclerAdapter<DressParameters, DressHold> frecycle = new FirebaseRecyclerAdapter<DressParameters, DressHold>(
-                DressParameters.class, R.layout.row_dress, DressHold.class, AppUtil.DRESSURL
+                DressParameters.class, R.layout.row_dress, DressHold.class, AppUtil.ELECTRONICURL
         ) {
             @Override
             protected void populateViewHolder(DressHold dressHold, DressParameters dp, int i) {

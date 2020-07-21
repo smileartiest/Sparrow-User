@@ -8,6 +8,8 @@
     <string name="title_activity_view_more_details">Map</string>
     <string name="default_notification_channel_id">smile</string>
     <string name="title_activity_check_location">Map</string>
+    <string name="channel_name">sparrow</string>
+    <string name="channel_description">Hyper Market</string>
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="previous">PREVIOUS</string>

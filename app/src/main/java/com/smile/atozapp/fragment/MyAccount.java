@@ -1,6 +1,6 @@
 package com.smile.atozapp.fragment;
 
-import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,27 +13,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.smile.atozapp.BuildConfig;
 import com.smile.atozapp.R;
 import com.smile.atozapp.activitiespage.FAQ_page;
 import com.smile.atozapp.activitiespage.MyCart;
 import com.smile.atozapp.activitiespage.MyOrder_Page;
-import com.smile.atozapp.activitiespage.Terms_Conditions;
-import com.smile.atozapp.addressdetails.AddAdress;
 import com.smile.atozapp.controller.AppUtil;
 import com.smile.atozapp.controller.TempData;
-import com.smile.atozapp.parameters.AddressParameters;
 
 public class MyAccount extends Fragment {
 
@@ -142,7 +132,19 @@ public class MyAccount extends Fragment {
         terms_condition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext() , Terms_Conditions.class));
+                Uri uri = Uri.parse("https://sparrowhypermarket.000webhostapp.com/sparrow/termscondition.php");
+                Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                // To count with Play market backstack, After pressing back button,
+                // to taken back to our application, we need to add following flags to intent.
+                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                try {
+                    startActivity(goToMarket);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://sparrowhypermarket.000webhostapp.com/sparrow/termscondition.php")));
+                }
             }
         });
     }

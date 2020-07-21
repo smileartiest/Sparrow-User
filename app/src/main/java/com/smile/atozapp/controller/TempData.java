@@ -63,4 +63,25 @@ public class TempData {
         return sharedPreferences.getString("fid","");
     }
 
+    public void addNotnow(String no){
+        ed.putString("not",no).apply();
+    }
+
+    public String getnotnow(){
+        return sharedPreferences.getString("not",null);
+    }
+
+    public void clearnotnoe(){
+        ed.remove("not").apply();
+    }
+
+    public void addDeliveryID(String did){
+        ed.putString("did",did).apply();
+    }
+
+    public String getDid(){
+        return sharedPreferences.getString("did",null);
+    }
+
+
 }

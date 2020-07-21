@@ -37,6 +37,11 @@ import com.smile.atozapp.parameters.BillingParameters;
 import com.smile.atozapp.parameters.CartParameters;
 import com.smile.atozapp.parameters.ChargeParameters;
 import com.smile.atozapp.parameters.OrderPatameters;
+import com.smile.atozapp.retrofit.ApiUtil;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyCart extends AppCompatActivity {
 
@@ -72,7 +77,7 @@ public class MyCart extends AppCompatActivity {
     TempOrder to;
 
     CSAlertDialog dialog;
-    Long order_ID;
+    long order_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -254,9 +259,9 @@ public class MyCart extends AppCompatActivity {
         builder.setCornerRadius(20);
         builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
         builder.setContentImageDrawable(R.drawable.happy_emoji_icon);
-        builder.setTextGravity(Gravity.CENTER);
-        builder.setTitle("Please confirm your Order. Your Pay for this order Rs. " + total_amount.getText().toString());
-        builder.addButton("YES", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
+        builder.setTitle("Conformation !");
+        builder.setMessage("Please confirm your Order. Your Pay for this order Rs. " + total_amount.getText().toString());
+        builder.addButton("complete", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -277,7 +282,8 @@ public class MyCart extends AppCompatActivity {
         TimeDate timedate = new TimeDate(MyCart.this);
         OrderPatameters o = new OrderPatameters(String.valueOf(order_ID), t.getuid(),"none", namelist.toString(), sizelist.toString(), qntylist.toString(), amlist.toString(), td.getaid(), "cashon", "new", timedate.getdate(), timedate.gettime());
         AppUtil.ORDERURl.child(String.valueOf(order_ID)).setValue(o);
-        BillingParameters b = new BillingParameters(String.valueOf(order_ID),String.valueOf(order_ID),namelist.toString(),sizelist.toString(), qntylist.toString(), amlist.toString() ,sb_total.getText().toString(),Charge_d_charge,Charge_discount,total_amount.getText().toString(),"new", timedate.gettime(),timedate.getdate());
+        final String oid1 = String.valueOf(order_ID);
+        BillingParameters b = new BillingParameters(String.valueOf(order_ID),String.valueOf(order_ID),t.getuid(),"new",timedate.getdate(),timedate.gettime(), amlist.toString() ,sb_total.getText().toString(),Charge_d_charge,Charge_discount,total_amount.getText().toString(),"new");
         AppUtil.BILLINGURl.child(String.valueOf(order_ID)).setValue(b);
         AppUtil.CARTURL.child(td.getuid()).removeValue();
         to.tclear();
@@ -285,10 +291,31 @@ public class MyCart extends AppCompatActivity {
             @Override
             public void run() {
                 dialog.CancelDialog();
+                sendnotify(oid1);
+            }
+        }, 2000);
+    }
+
+    void sendnotify(String oid){
+        Call<String> call = ApiUtil.getServiceClass().sendpush("Hai "+new TempData(MyCart.this).getuid() , "successfully complete my order my Order ID is "+oid);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    startActivity(new Intent(getApplicationContext(), LoginMain.class));
+                    finishAffinity();
+                }else{
+                    startActivity(new Intent(getApplicationContext(), LoginMain.class));
+                    finishAffinity();
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("Error My Cart ", t.getMessage());
                 startActivity(new Intent(getApplicationContext(), LoginMain.class));
                 finishAffinity();
             }
-        }, 2000);
+        });
     }
 
     public void getList() {
